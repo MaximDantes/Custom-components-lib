@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "noImplicitAny": true,
+        "module": "esnext",
+        "target": "es5",
+        "jsx": "react-jsx",
+        "allowJs": false,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "baseUrl": ".",
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "types": ["@testing-library/jest-dom"],
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "plugins": [
+            {
+                "name": "typescript-plugin-css-modules"
+            }
+        ]
+    },
+    "ts-node": {
+        "compilerOptions": {
+            "module": "CommonJS"
+        }
+    },
+    "exclude": ["node_modules", "dist"]
+}
