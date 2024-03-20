@@ -7,7 +7,6 @@ import buildBabelLoader from './babel/build-babel-loader'
 const buildLoaders = (options: BuildOptions): webpack.ModuleOptions['rules'] => {
     const isDev = options.mode === 'development'
 
-    //TODO remove ts loader
     const tsLoader = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
@@ -25,7 +24,6 @@ const buildLoaders = (options: BuildOptions): webpack.ModuleOptions['rules'] => 
 
     const babelLoader = buildBabelLoader(options)
 
-    //TODO throw ts error when class name is invalid
     const cssLoader = {
         loader: 'css-loader',
         options: {

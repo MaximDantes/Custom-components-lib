@@ -1,24 +1,11 @@
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import React from 'react'
-import App from './pages/App/App'
+import App from './App'
 
-const Info = React.lazy(() => import('./pages/Info/Info'))
+const routes = createRoutesFromElements(<Route path={'/'} element={<App />} />)
 
-const router = createBrowserRouter(
-    createRoutesFromElements(
-        <Route path={'/'} element={<App />}>
-            <Route
-                path={'info'}
-                element={
-                    <React.Suspense fallback={'loading'}>
-                        <Info />
-                    </React.Suspense>
-                }
-            />
-        </Route>
-    )
-)
+const router = createBrowserRouter(routes)
 
 createRoot(document.querySelector('#root')).render(
     <React.StrictMode>

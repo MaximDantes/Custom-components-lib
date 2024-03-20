@@ -14,8 +14,7 @@
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
         "lint": "eslint .",
-        "format": "prettier --write .",
-        "prepare": "husky install"
+        "format": "prettier --write ."
     },
     "keywords": [],
     "author": "",
