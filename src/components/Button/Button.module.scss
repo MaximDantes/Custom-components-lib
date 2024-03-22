@@ -15,8 +15,68 @@
     text-transform: uppercase;
     cursor: pointer;
     outline: none;
+    overflow: hidden;
+    isolation: isolate;
 
-    //TODO animation
+    &:active::before {
+        animation: click 0.5s;
+    }
+
+    &:active::after {
+        display: none;
+    }
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: var(--y);
+        left: var(--x);
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0.75s;
+        z-index: -1;
+        width: 200%;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        background: #1976d2;
+        opacity: 0.5;
+    }
+
+    &::after {
+        top: 50%;
+        left: 50%;
+        width: 80%;
+        opacity: 0.25;
+        transition: 0.2s;
+    }
+
+    &:focus::after {
+        transform: translate(-50%, -50%) scale(1);
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes click {
+        0% {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0.5;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
+        }
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
 }
 
 .contained {
@@ -24,9 +84,27 @@
     background-color: #1976d2;
     box-shadow: rgba(0, 0, 0, 0.2) 0 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px,
         rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+    transition: background-color 0.75s, box-shadow 0.75s;
 
     .icon {
         fill: #ffffff;
+    }
+
+    &:hover {
+        background-color: #1565c0;
+
+        box-shadow: rgb(0 0 0 / 0.2) 0 2px 4px -1px, rgb(0 0 0 / 0.14) 0px 4px 5px 0px,
+            rgb(0 0 0 / 0.12) 0px 1px 10px 0px;
+    }
+
+    &:active {
+        box-shadow: rgb(0 0 0 / 0.4) 0 2px 4px -1px, rgb(0 0 0 / 0.28) 0px 4px 5px 0px,
+            rgb(0 0 0 / 0.24) 0px 1px 10px 0px;
+    }
+
+    &::after,
+    &::before {
+        background-color: #fff;
     }
 }
 

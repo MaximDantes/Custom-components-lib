@@ -1,4 +1,4 @@
-import React, { DOMAttributes, FC, ReactNode } from 'react'
+import React, { DOMAttributes, FC, ReactNode, MouseEvent, useRef } from 'react'
 import styles from './Button.module.scss'
 
 type Props = Partial<{
@@ -14,7 +14,9 @@ type Props = Partial<{
     DOMAttributes<HTMLButtonElement>
 
 const Button: FC<Props> = ({ variant, size, disabled, startIcon, endIcon, tabIndex, children, type, ...props }) => {
-    const classNames = [styles.button]
+    const ref = useRef<HTMLButtonElement>()
+
+    const classNames = [styles.button, styles.pulse]
 
     if (variant) {
         classNames.push(styles[variant])
@@ -30,17 +32,32 @@ const Button: FC<Props> = ({ variant, size, disabled, startIcon, endIcon, tabInd
 
     if (disabled) classNames.push(styles.disabled)
 
+    const handleMouseMove = (e: MouseEvent<HTMLButtonElement>) => {
+        ref.current.style.setProperty('--x', e.nativeEvent.offsetX + 'px')
+        ref.current.style.setProperty('--y', e.nativeEvent.offsetY + 'px')
+    }
+
+    const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+        ref.current.blur()
+        e.preventDefault()
+    }
+
     return (
         <button
+            ref={ref}
             {...props}
             className={classNames.join(' ')}
             tabIndex={tabIndex ?? 0}
             type={type ?? 'button'}
             role={'button'}
             disabled={disabled}
+            onMouseMove={handleMouseMove}
+            onClick={handleClick}
         >
             {startIcon && <span className={styles.icon}>{startIcon}</span>}
+
             <span>{children}</span>
+
             {endIcon && <span className={styles.icon}>{endIcon}</span>}
         </button>
     )
