@@ -3,6 +3,7 @@ import webpack from 'webpack'
 import { BuildOptions } from './types'
 import ReactRefreshTypeScript from 'react-refresh-typescript'
 import buildBabelLoader from './babel/build-babel-loader'
+import svgrOptions from './svgr/svgr-options'
 
 const buildLoaders = (options: BuildOptions): webpack.ModuleOptions['rules'] => {
     const isDev = options.mode === 'development'
@@ -49,21 +50,7 @@ const buildLoaders = (options: BuildOptions): webpack.ModuleOptions['rules'] => 
         use: [
             {
                 loader: '@svgr/webpack',
-                options: {
-                    icon: true,
-                    typescript: true,
-                    ext: 'tsx',
-                    svgoConfig: {
-                        plugins: [
-                            {
-                                name: 'convertColors',
-                                params: {
-                                    currentColor: true,
-                                },
-                            },
-                        ],
-                    },
-                },
+                options: svgrOptions,
             },
         ],
     }

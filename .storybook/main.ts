@@ -1,4 +1,5 @@
 import { StorybookConfig } from '@storybook/react-webpack5'
+import svgrOptions from '../config/build/svgr/svgr-options'
 
 const config: StorybookConfig = {
     stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -17,6 +18,25 @@ const config: StorybookConfig = {
     },
     docs: {
         autodocs: 'tag',
+    },
+
+    webpackFinal: (config) => {
+        //@ts-ignore
+        const fileLoaderRule = config.module.rules.find((rule) => rule.test && rule.test.test('.svg'))
+
+        //@ts-ignore
+        fileLoaderRule.test = /\.(ico|jpg|jpeg|png|apng|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/
+
+        console.log(fileLoaderRule)
+
+        config.module.rules.push({
+            test: /\.svg$/,
+            enforce: 'pre',
+            loader: '@svgr/webpack',
+            options: svgrOptions,
+        })
+
+        return config
     },
 }
 export default config

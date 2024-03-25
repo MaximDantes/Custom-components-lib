@@ -1,4 +1,4 @@
-import React, { DOMAttributes, FC, ReactNode, MouseEvent, useRef } from 'react'
+import React, { FC, ReactNode, MouseEvent, useRef } from 'react'
 import styles from './Button.module.scss'
 
 type Props = Partial<{
@@ -10,27 +10,27 @@ type Props = Partial<{
     children: ReactNode
     tabIndex: number
     type: 'button' | 'submit' | 'reset'
-}> &
-    DOMAttributes<HTMLButtonElement>
+    onClick: (e: MouseEvent<HTMLButtonElement>) => void
+}>
 
-const Button: FC<Props> = ({ variant, size, disabled, startIcon, endIcon, tabIndex, children, type, ...props }) => {
+const Button: FC<Props> = (props) => {
     const ref = useRef<HTMLButtonElement>()
 
-    const classNames = [styles.button, styles.pulse]
+    const classNames = [styles.button]
 
-    if (variant) {
-        classNames.push(styles[variant])
+    if (props.variant) {
+        classNames.push(styles[props.variant])
     } else {
         classNames.push(styles.contained)
     }
 
-    if (size) {
-        classNames.push(styles[size])
+    if (props.size) {
+        classNames.push(styles[props.size])
     } else {
         classNames.push(styles.medium)
     }
 
-    if (disabled) classNames.push(styles.disabled)
+    if (props.disabled) classNames.push(styles.disabled)
 
     const handleMouseMove = (e: MouseEvent<HTMLButtonElement>) => {
         ref.current.style.setProperty('--x', e.nativeEvent.offsetX + 'px')
@@ -38,27 +38,29 @@ const Button: FC<Props> = ({ variant, size, disabled, startIcon, endIcon, tabInd
     }
 
     const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-        ref.current.blur()
-        e.preventDefault()
+        if (e.nativeEvent.detail) {
+            //only mouse click
+            ref.current.blur()
+        }
+
+        props.onClick?.(e)
     }
 
     return (
         <button
             ref={ref}
-            {...props}
             className={classNames.join(' ')}
-            tabIndex={tabIndex ?? 0}
-            type={type ?? 'button'}
+            tabIndex={props.tabIndex ?? 0}
+            type={props.type ?? 'button'}
             role={'button'}
-            disabled={disabled}
+            disabled={props.disabled}
             onMouseMove={handleMouseMove}
             onClick={handleClick}
         >
-            {startIcon && <span className={styles.icon}>{startIcon}</span>}
+            {props.startIcon && <span className={styles.icon}>{props.startIcon}</span>}
+            <span>{props.children}</span>
 
-            <span>{children}</span>
-
-            {endIcon && <span className={styles.icon}>{endIcon}</span>}
+            {props.endIcon && <span className={styles.icon}>{props.endIcon}</span>}
         </button>
     )
 }

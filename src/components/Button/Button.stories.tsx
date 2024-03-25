@@ -20,7 +20,7 @@ export const Contained: Story = {
 export const Text: Story = {
     args: {
         variant: 'text',
-        children: 'text',
+        children: 't',
     },
 }
 
