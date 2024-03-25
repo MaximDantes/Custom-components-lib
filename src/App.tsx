@@ -9,7 +9,18 @@ const App: FC = () => {
         <>
             <div>
                 <MyCheckbox label={'gtgtgt'} checked={isChecked} onChange={() => setIsChecked((prev) => !prev)} />
-                <MyCheckbox label={'gtgtgt'} checked />
+                <MyCheckbox
+                    label={'gtgtgt'}
+                    checked={!isChecked}
+                    onChange={() => setIsChecked((prev) => !prev)}
+                    disabled
+                />
+                <MyCheckbox
+                    label={'gtgtgt'}
+                    checked={isChecked}
+                    onChange={() => setIsChecked((prev) => !prev)}
+                    disabled
+                />
             </div>
             <div>
                 <FormControlLabel control={<Checkbox />} label={'muifrfr'} />

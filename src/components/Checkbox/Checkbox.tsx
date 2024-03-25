@@ -10,8 +10,13 @@ type Props = Partial<{
 }>
 
 const Checkbox: FC<Props> = (props) => {
+    //TODO animation
     const ref = useRef<HTMLLabelElement>()
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if (props.disabled) return
+
+        ref.current.blur()
+
         ref.current.classList.add(styles.animated)
         props.onChange?.(e)
     }
@@ -20,14 +25,32 @@ const Checkbox: FC<Props> = (props) => {
         ref.current.classList.remove(styles.animated)
     }
 
+    const handleFocus = () => {
+        ref.current.classList.add(styles.focused)
+    }
+
+    const handleBlur = () => {
+        ref.current.classList.remove(styles.focused)
+    }
+
     const containerStyles = [styles.container]
-    if (!props.checked) containerStyles.push(styles.unchecked)
+    if (props.disabled) containerStyles.push(styles.disabled)
+
+    const checkboxStyles = [styles.checkbox]
+    if (!props.checked) checkboxStyles.push(styles.unchecked)
 
     return (
         <label className={containerStyles.join(' ')}>
-            <input type={'checkbox'} className={styles.input} onChange={handleChange} />
+            <input
+                type={'checkbox'}
+                className={styles.input}
+                onChange={handleChange}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                tabIndex={props.disabled ? -1 : undefined}
+            />
 
-            <span className={styles.checkbox} ref={ref} onAnimationEnd={handleAnimationEnd}>
+            <span className={checkboxStyles.join(' ')} ref={ref} onAnimationEnd={handleAnimationEnd}>
                 <Icon className={styles.icon} />
             </span>
 
