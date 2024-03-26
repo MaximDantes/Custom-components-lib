@@ -18,6 +18,7 @@
     outline: none;
     overflow: hidden;
     isolation: isolate;
+    height: fit-content;
 
     &:active::before {
         animation: click 0.5s;
