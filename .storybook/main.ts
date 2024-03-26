@@ -27,8 +27,6 @@ const config: StorybookConfig = {
         //@ts-ignore
         fileLoaderRule.test = /\.(ico|jpg|jpeg|png|apng|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/
 
-        console.log(fileLoaderRule)
-
         config.module.rules.push({
             test: /\.svg$/,
             enforce: 'pre',
