@@ -8,12 +8,20 @@ const App: FC = () => {
     return (
         <>
             <div>
-                <MyTextField label={'outline'} value={text} onChange={(e) => setText(e.currentTarget.value)} />
+                <MyTextField label={'outline'} value={text} onChange={(e) => setText(e.currentTarget.value)} disabled />
                 <MyTextField
                     label={'filled'}
                     value={text}
                     onChange={(e) => setText(e.currentTarget.value)}
                     variant={'filled'}
+                    disabled
+                />
+                <MyTextField
+                    label={'standard'}
+                    value={text}
+                    onChange={(e) => setText(e.currentTarget.value)}
+                    variant={'standard'}
+                    disabled
                 />
                 <MyTextField
                     label={'standard'}
@@ -23,9 +31,12 @@ const App: FC = () => {
                 />
             </div>
             <div>
-                <TextField id="outlined-basic" label="Outlined" variant="outlined" error helperText={'frefe'} />
-                <TextField id="outlined-basic" label="Outlined" variant="filled" error helperText={'frefe'} />
-                <TextField id="outlined-basic" label="Outlined" variant="standard" error helperText={'frefe'} />
+                <TextField id="outlined-basic" label="Outlined" variant="outlined" disabled />
+                <TextField id="outlined-basic" label="Outlined" variant="filled" disabled />
+                <TextField id="outlined-basic" label="Outlined" variant="standard" disabled />
+                <TextField id="outlined-basic" label="Outlined" variant="outlined" disabled />
+                <TextField id="outlined-basic" label="Outlined" variant="filled" disabled />
+                <TextField id="outlined-basic" label="Outlined" variant="standard" disabled />
             </div>
         </>
     )

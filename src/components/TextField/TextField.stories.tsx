@@ -17,3 +17,27 @@ export const Default: Story = {
         value: 'fwfw',
     },
 }
+
+export const Error: Story = {
+    args: {
+        variant: 'outlined',
+        label: 'some error',
+        error: 'error error',
+    },
+}
+
+export const Disabled: Story = {
+    args: {
+        variant: 'outlined',
+        label: 'disabled',
+        disabled: true,
+    },
+}
+
+export const FullWidth: Story = {
+    args: {
+        variant: 'outlined',
+        label: 'full width',
+        fullWidth: true,
+    },
+}

@@ -30,7 +30,7 @@ const buildLoaders = (options: BuildOptions): webpack.ModuleOptions['rules'] => 
         options: {
             modules: {
                 localIdentName: isDev ? '[local]-[hash:base64:8]' : '[hash:base64:8]',
-                exportLocalsConvention: 'camelCase',
+                // exportLocalsConvention: 'camelCase',
             },
         },
     }

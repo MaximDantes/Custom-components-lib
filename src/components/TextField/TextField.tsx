@@ -13,52 +13,73 @@ type Props = {
 
 const TextField: FC<Props> = (props) => {
     const ref = useRef<HTMLDivElement>()
+    const value = props.disabled ? '' : props.value
 
     useEffect(() => {
         if (props.value) {
-            ref.current.classList.add(styles.notEmpty)
+            ref.current.classList.add(styles['not-empty'])
             return
         }
 
         if (!ref.current.classList.contains(styles.focused)) {
-            ref.current.classList.remove(styles.notEmpty)
+            ref.current.classList.remove(styles['not-empty'])
         }
-    }, [props.value])
+    }, [value, props.variant])
+
     const handleFocus = () => {
+        if (props.disabled) return
+
         ref.current.classList.add(styles.focused)
-        ref.current.classList.add(styles.notEmpty)
+        ref.current.classList.add(styles['not-empty'])
     }
 
     const handleBlur = () => {
         if (!props.value) {
-            ref.current.classList.remove(styles.notEmpty)
+            ref.current.classList.remove(styles['not-empty'])
         }
         ref.current.classList.remove(styles.focused)
     }
 
-    const containerStyles = [styles.textField]
+    const textFieldStyles = [styles['text-field']]
     if (props.variant) {
-        containerStyles.push(styles[props.variant])
+        textFieldStyles.push(styles[props.variant])
     } else {
-        containerStyles.push(styles.outlined)
+        textFieldStyles.push(styles.outlined)
+    }
+
+    const containerStyles = [styles.container]
+    if (props.error) {
+        containerStyles.push(styles.error)
     }
     if (props.fullWidth) {
-        containerStyles.push(styles.fullWidth)
+        containerStyles.push(styles['full-width'])
+    }
+    if (props.disabled) {
+        containerStyles.push(styles.disabled)
+    }
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if (props.disabled) return
+
+        props.onChange(e)
     }
 
     return (
-        <div className={containerStyles.join(' ')} ref={ref}>
-            {props.label && <label className={styles.label}>{props.label}</label>}
+        <div className={containerStyles.join(' ')}>
+            <div className={textFieldStyles.join(' ')} ref={ref}>
+                {props.label && <label className={styles.label}>{props.label}</label>}
 
-            <input
-                className={styles.input}
-                value={props.value}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                onChange={props.onChange}
-            />
+                <input
+                    className={styles.input}
+                    value={value}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    disabled={props.disabled}
+                />
+            </div>
 
-            {props.error && <label>{props.error}</label>}
+            <label className={styles['error-text']}>{props.error}</label>
         </div>
     )
 }

@@ -1,9 +1,8 @@
-//TODO hover
-.textField {
+.container {
     display: inline-flex;
+    flex-direction: column;
     vertical-align: top;
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    position: relative;
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.4375em;
@@ -12,6 +11,11 @@
     * {
         box-sizing: border-box;
     }
+}
+
+.text-field {
+    display: inline-flex;
+    position: relative;
 
     &::after {
         content: '';
@@ -46,10 +50,16 @@
     height: 1.4375em;
     margin: 0;
     display: block;
-    width: 200px;
     padding: 16px 14px;
     outline: none;
     border: none;
+}
+
+.error-text {
+    color: #d32f2f;
+    font-size: 0.75rem;
+    display: none;
+    margin: 3px 14px 0;
 }
 
 .outlined {
@@ -78,7 +88,7 @@
     }
 
     .input {
-        padding: 25px 14px 8px;
+        padding: 25px 14px 7px;
     }
 }
 
@@ -109,6 +119,7 @@
 
 .not-empty.filled {
     .label {
+        //TODO left padding in storybook
         transform: translate(9px, 7px) scale(0.75);
     }
 }
@@ -156,5 +167,60 @@
     .input {
         display: flex;
         width: 100%;
+    }
+}
+
+.error {
+    .label {
+        color: #d32f2f;
+    }
+
+    .error-text {
+        display: inline;
+    }
+
+    .outlined {
+        border-color: #d32f2f;
+
+        .input {
+            border-color: #d32f2f;
+
+            &:hover {
+                border-color: #d32f2f;
+            }
+        }
+    }
+
+    .text-field::after {
+        border-color: #d32f2f;
+    }
+
+    .filled,
+    .standard {
+        border-color: #d32f2f;
+    }
+}
+
+.disabled {
+    .label {
+        color: rgba(0, 0, 0, 0.38);
+    }
+
+    .standard:hover,
+    .filled:hover {
+        border-color: rgba(0, 0, 0, 0.42);
+    }
+
+    .input:hover {
+        border-color: rgba(0, 0, 0, 0.23);
+    }
+
+    .filled {
+        background-color: rgba(0, 0, 0, 0.12);
+    }
+
+    .standard,
+    .filled {
+        border-bottom-style: dotted;
     }
 }
