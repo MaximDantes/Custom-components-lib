@@ -4,6 +4,7 @@ import styles from './Switch.module.scss'
 type Props = {
     checked: boolean
     onChange: (checked: boolean) => void
+    label?: string
     disabled?: boolean
 }
 
@@ -31,14 +32,19 @@ const Switch: FC<Props> = (props) => {
     }
 
     return (
-        <span className={containerStyles.join(' ')} ref={ref}>
-            <span className={styles.track} />
+        <label className={containerStyles.join(' ')}>
+            <span className={styles['switch-container']} ref={ref}>
+                <span className={styles.track} />
 
-            <span className={styles.circle} />
+                <span className={styles.circle} />
+            </span>
+
+            {props.label}
 
             <input
                 className={styles.input}
                 type={'checkbox'}
+                role={'switch'}
                 disabled={props.disabled}
                 checked={props.checked}
                 onChange={handleChange}
@@ -46,7 +52,7 @@ const Switch: FC<Props> = (props) => {
                 onBlur={handleBlur}
                 tabIndex={props.disabled ? -1 : undefined}
             />
-        </span>
+        </label>
     )
 }
 

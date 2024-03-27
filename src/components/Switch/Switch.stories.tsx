@@ -2,9 +2,10 @@ import React, { FC, useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import Switch from './Switch'
 
-type PresentationProps = {
+type PresentationProps = Partial<{
     disabled: boolean
-}
+    label: string
+}>
 
 const Presentation: FC<PresentationProps> = (props) => {
     const [checked, setChecked] = useState(false)
@@ -17,6 +18,7 @@ const meta: Meta<typeof Presentation> = {
     component: Presentation,
     args: {
         disabled: false,
+        label: 'switch switch',
     },
 }
 

@@ -1,11 +1,15 @@
 //TODO animation
 
 .container {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
     display: inline-flex;
-    position: relative;
-    width: 58px;
-    height: 38px;
     align-items: center;
+    gap: 10px;
+    position: relative;
 
     * {
         cursor: pointer;
@@ -16,6 +20,14 @@
             transform: scale(1.8);
         }
     }
+}
+
+.switch-container {
+    display: inline-flex;
+    position: relative;
+    width: 38px;
+    height: 38px;
+    align-items: center;
 }
 
 .input {
@@ -77,6 +89,8 @@
 }
 
 .disabled {
+    color: rgba(0, 0, 0, 0.38);
+
     * {
         cursor: default;
     }
