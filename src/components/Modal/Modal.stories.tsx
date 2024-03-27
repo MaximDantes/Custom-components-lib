@@ -1,23 +1,25 @@
 import React, { FC, useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import Switch from './Switch'
+import Modal from './Modal'
+import Button from './../Button/Button'
 
 type PresentationProps = {
-    disabled: boolean
+    open: boolean
 }
 
 const Presentation: FC<PresentationProps> = (props) => {
-    const [checked, setChecked] = useState(false)
-
-    return <Switch {...props} checked={checked} onChange={(checked) => setChecked(checked)} />
+    const [open, setOpen] = useState(props.open)
+    return (
+        <>
+            <Button onClick={() => setOpen(true)}>show modal</Button>
+            <Modal open={open} onClose={() => setOpen(false)} />
+        </>
+    )
 }
 
 const meta: Meta<typeof Presentation> = {
-    title: 'Components/Switch',
+    title: 'Components/Modal',
     component: Presentation,
-    args: {
-        disabled: false,
-    },
 }
 
 export default meta
@@ -25,9 +27,3 @@ export default meta
 type Story = StoryObj<typeof Presentation>
 
 export const Default: Story = {}
-
-export const Disabled: Story = {
-    args: {
-        disabled: true,
-    },
-}

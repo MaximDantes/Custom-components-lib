@@ -3,7 +3,7 @@ import styles from './Switch.module.scss'
 
 type Props = {
     checked: boolean
-    onChange: (e: ChangeEvent<HTMLInputElement>, checked: boolean) => void
+    onChange: (checked: boolean) => void
     disabled?: boolean
 }
 
@@ -19,7 +19,7 @@ const Switch: FC<Props> = (props) => {
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        props.onChange(e, e.currentTarget.checked)
+        props.onChange(e.currentTarget.checked)
     }
 
     const handleFocus = () => {

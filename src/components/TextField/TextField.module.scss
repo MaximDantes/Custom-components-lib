@@ -40,6 +40,7 @@
     transition: transform 0.2s;
     max-width: 100px;
     text-overflow: ellipsis;
+    //TODO wrap
 }
 
 .input {
@@ -171,6 +172,7 @@
 }
 
 .error {
+    //TODO handle long message
     .label {
         color: #d32f2f;
     }
