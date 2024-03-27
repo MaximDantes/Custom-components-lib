@@ -9,6 +9,7 @@ type Props = {
     disabled?: boolean
     error?: string
     fullWidth?: boolean
+    select?: boolean
 }
 
 const TextField: FC<Props> = (props) => {
@@ -57,6 +58,9 @@ const TextField: FC<Props> = (props) => {
     if (props.disabled) {
         containerStyles.push(styles.disabled)
     }
+    if (props.select) {
+        containerStyles.push(styles.select)
+    }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (props.disabled) return
@@ -76,6 +80,7 @@ const TextField: FC<Props> = (props) => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     disabled={props.disabled}
+                    role={props.select && 'select'}
                 />
             </div>
 
