@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, MouseEvent, useRef } from 'react'
+import React, { FC, MouseEvent, ReactNode, useRef } from 'react'
 import styles from './Button.module.scss'
 
 type Props = Partial<{
@@ -38,23 +38,24 @@ const Button: FC<Props> = (props) => {
     }
 
     const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-        if (e.nativeEvent.detail) {
-            //only mouse click
-            ref.current.blur()
-        }
+        ref.current.classList.add(styles.animated)
 
         props.onClick?.(e)
+    }
+
+    const handleAnimationEnd = () => {
+        ref.current.classList.remove(styles.animated)
     }
 
     return (
         <button
             ref={ref}
             className={classNames.join(' ')}
-            tabIndex={props.tabIndex ?? 0}
+            tabIndex={props.tabIndex ?? undefined}
             type={props.type ?? 'button'}
-            role={'button'}
             disabled={props.disabled}
             onMouseMove={handleMouseMove}
+            onAnimationEnd={handleAnimationEnd}
             onClick={handleClick}
         >
             {props.startIcon && <span className={styles.icon}>{props.startIcon}</span>}
