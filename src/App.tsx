@@ -1,43 +1,14 @@
-import { FC } from 'react'
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
-import MySelect from '@/components/Select/Select'
+import { FC, useState } from 'react'
+import MyCheckbox from '@/components/Checkbox/Checkbox'
+import { Checkbox } from '@mui/material'
 
 const App: FC = () => {
+    const [checked, setChecked] = useState(false)
+
     return (
         <>
-            <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    // value={age}
-                    label="Age"
-                    // onChange={handleChange}
-                >
-                    <MenuItem value={10}>
-                        Tenfewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
-                    </MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-            </FormControl>
-
-            <MySelect
-                label={'select'}
-                options={[
-                    { value: 1, title: 'one' },
-                    { value: 2, title: 'two' },
-                    { value: 3, title: 'three' },
-                ]}
-            />
-            <MySelect
-                label={'select'}
-                options={[
-                    { value: 1, title: 'one' },
-                    { value: 2, title: 'two' },
-                    { value: 3, title: 'three' },
-                ]}
-            />
+            <MyCheckbox label={'ggregre'} checked={checked} onChange={(checked) => setChecked(checked)} />
+            <Checkbox checked={checked} onChange={(e) => setChecked(e.target.checked)} />
         </>
     )
 }

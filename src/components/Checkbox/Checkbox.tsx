@@ -6,7 +6,7 @@ type Props = Partial<{
     checked: boolean
     disabled: boolean
     label: string
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void
+    onChange: (checked: boolean) => void
 }>
 
 const Checkbox: FC<Props> = (props) => {
@@ -15,10 +15,10 @@ const Checkbox: FC<Props> = (props) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (props.disabled) return
 
-        ref.current.blur()
+        // ref.current.blur()
 
         ref.current.classList.add(styles.animated)
-        props.onChange?.(e)
+        props.onChange?.(e.target.checked)
     }
 
     const handleAnimationEnd = () => {
