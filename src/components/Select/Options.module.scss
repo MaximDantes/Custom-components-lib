@@ -2,6 +2,7 @@
     position: absolute;
     width: fit-content;
     min-width: 200px;
+    z-index: 1000;
     top: var(--y);
     left: var(--x);
     background-color: #fff;
@@ -33,4 +34,8 @@
 
 .selected {
     background-color: rgba(25, 118, 210, 0.08);
+}
+
+.full-width {
+    width: 100%;
 }

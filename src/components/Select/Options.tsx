@@ -1,29 +1,51 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, MouseEvent } from 'react'
 import styles from './Options.module.scss'
 
-export type Option = { value: number | string; title: string }
+export type Option = {
+    value: number | string | null
+    title: string
+}
 
 type Props = {
     options: Option[]
-    onSelect: (selectedValue: string | number) => void
+    onSelect: (value: string | number | null) => void
     onClose: () => void
-    selectedValue?: number | string
+    selectedValue: number | string | null
+    userSelection: number
+    fullWidth?: boolean
 }
 const Options = forwardRef<HTMLDivElement, Props>((props, ref) => {
+    const containerStyles = [styles['options-container']]
+    if (props.fullWidth) {
+        containerStyles.push(styles['full-width'])
+    }
+
+    const handleMouseDown = (e: MouseEvent) => {
+        e.preventDefault()
+    }
+
+    const handleClick = (value: string | number | null) => {
+        props.onSelect(value)
+    }
+
     return (
-        <div className={styles['options-container']} ref={ref}>
-            {props.options.map((item) => {
+        <div className={containerStyles.join(' ')} ref={ref} onMouseDown={handleMouseDown}>
+            {props.options.map((item, index) => {
                 const classList = [styles.option]
                 if (item.value === props.selectedValue) {
                     classList.push(styles.selected)
                 }
-
-                const handleClick = () => {
-                    props.onSelect(item.value)
+                if (index === props.userSelection) {
+                    classList.push(styles.selected)
                 }
 
                 return (
-                    <option className={classList.join(' ')} key={item.value} value={item.value} onClick={handleClick}>
+                    <option
+                        className={classList.join(' ')}
+                        key={item.value}
+                        value={item.value}
+                        onClick={() => handleClick(item.value)}
+                    >
                         {item.title}
                     </option>
                 )

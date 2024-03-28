@@ -1,4 +1,28 @@
 .container {
     position: relative;
     display: inline-flex;
+
+    &::after {
+        content: '';
+        position: absolute;
+        right: 13px;
+        top: calc(50% - 0.17rem);
+        width: 0;
+        height: 0;
+        border: 0.35rem solid transparent;
+        border-top: 0.35rem solid rgba(0, 0, 0, 0.54);
+        border-bottom: 0;
+        pointer-events: none;
+    }
+}
+
+.open {
+    &::after {
+        border-bottom: 0.35rem solid rgba(0, 0, 0, 0.54);
+        border-top: 0;
+    }
+}
+
+.full-width {
+    width: 100%;
 }

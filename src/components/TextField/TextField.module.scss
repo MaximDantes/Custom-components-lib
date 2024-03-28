@@ -170,6 +170,7 @@
 
 .full-width {
     display: flex;
+    width: 100%;
 
     .input {
         display: flex;
@@ -239,5 +240,15 @@
 }
 
 .select {
-    padding-right: 20px;
+    position: relative;
+
+    * {
+        cursor: pointer;
+    }
+
+    .input {
+        padding-right: 35px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 }

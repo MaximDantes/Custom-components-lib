@@ -10,6 +10,7 @@ type Props = {
     error?: string
     fullWidth?: boolean
     select?: boolean
+    readOnly?: boolean
 }
 
 const TextField: FC<Props> = (props) => {
@@ -81,6 +82,7 @@ const TextField: FC<Props> = (props) => {
                     onChange={handleChange}
                     disabled={props.disabled}
                     role={props.select && 'select'}
+                    readOnly={props.readOnly}
                 />
             </div>
 

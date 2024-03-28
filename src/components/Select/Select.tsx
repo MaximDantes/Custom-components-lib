@@ -1,54 +1,112 @@
-import React, { FC, useLayoutEffect, useRef, useState } from 'react'
+import React, { FC, KeyboardEvent, useLayoutEffect, useRef, useState } from 'react'
 import TextField from '@/components/TextField/TextField'
 import { createPortal } from 'react-dom'
 import styles from './Select.module.scss'
 import Options, { Option } from '@/components/Select/Options'
 
 type Props = {
+    open: boolean
+    onToggle: (open: boolean) => void
+    value: string | number | null
+    onChange: (value: string | number | null) => void
+    options: Option[]
     variant?: 'outlined' | 'filled' | 'standard'
-    options?: Option[]
     label?: string
     fullWidth?: boolean
 }
 
 const Select: FC<Props> = (props) => {
-    const [value, setValue] = useState<string | number | undefined>(2)
-    const [open, setOpen] = useState(false)
+    const [userSelection, setUserSelection] = useState(-1)
+
     const container = useRef<HTMLDivElement>()
     const optionsContainer = useRef<HTMLDivElement>()
 
     useLayoutEffect(() => {
-        if (!open) return
+        if (!props.open) return
         optionsContainer.current.style.setProperty('--y', container.current.getBoundingClientRect().bottom + 'px')
         optionsContainer.current.style.setProperty('--x', container.current.getBoundingClientRect().left + 8 + 'px')
         optionsContainer.current.style.setProperty('--width', container.current.clientWidth + 'px')
-    }, [open])
+    }, [props.open])
+
+    const containerStyles = [styles.container]
+    if (props.fullWidth) {
+        containerStyles.push(styles['full-width'])
+    }
+    if (props.open) {
+        containerStyles.push(styles.open)
+    }
 
     const handleClick = () => {
-        setOpen(true)
+        setUserSelection(-1)
+        props.onToggle(!props.open)
+    }
+
+    const handleSelect = (value: string | number | null) => {
+        props.onChange(value)
+        props.onToggle(false)
+    }
+
+    const handleBlur = () => {
+        props.onToggle(false)
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if ((e.key === 'Space' || e.key === 'Enter') && !props.open) {
+            setUserSelection(-1)
+            props.onToggle(true)
+            return
+        }
+
+        if (e.key === 'ArrowDown') {
+            const newSelection = userSelection < props.options.length - 1 ? userSelection + 1 : 0
+            setUserSelection(newSelection)
+        }
+
+        if (e.key === 'ArrowUp') {
+            const newSelection = userSelection > 0 ? userSelection - 1 : props.options.length - 1
+            setUserSelection(newSelection)
+        }
+
+        if (e.key === 'Enter') {
+            props.onChange(userSelection > -1 ? props.options[userSelection].value : null)
+            props.onToggle(false)
+        }
+
+        if (e.key === 'Escape') {
+            props.onToggle(false)
+        }
     }
 
     return (
         <>
-            <div ref={container} className={styles.container} onClick={handleClick}>
+            <div
+                ref={container}
+                className={containerStyles.join(' ')}
+                onClick={handleClick}
+                onBlur={handleBlur}
+                onKeyDown={handleKeyDown}
+            >
                 <TextField
                     variant={props.variant}
                     label={props.label}
                     fullWidth={props.fullWidth}
-                    value={String(value)}
+                    value={props.value === null ? '' : props.options.find((item) => item.value === props.value)?.title}
                     onChange={() => {}}
                     select
+                    readOnly
                 />
             </div>
 
-            {open &&
+            {props.open &&
                 createPortal(
                     <Options
                         options={props.options}
-                        selectedValue={value}
+                        selectedValue={props.value}
                         ref={optionsContainer}
-                        onSelect={(value) => setValue(value)}
-                        onClose={() => setOpen(false)}
+                        onSelect={handleSelect}
+                        onClose={() => props.onToggle(false)}
+                        userSelection={userSelection}
+                        fullWidth={props.fullWidth}
                     />,
                     document.body
                 )}

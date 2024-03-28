@@ -37,16 +37,6 @@ const Button: FC<Props> = (props) => {
         ref.current.style.setProperty('--y', e.nativeEvent.offsetY + 'px')
     }
 
-    const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-        ref.current.classList.add(styles.animated)
-
-        props.onClick?.(e)
-    }
-
-    const handleAnimationEnd = () => {
-        ref.current.classList.remove(styles.animated)
-    }
-
     return (
         <button
             ref={ref}
@@ -55,8 +45,7 @@ const Button: FC<Props> = (props) => {
             type={props.type ?? 'button'}
             disabled={props.disabled}
             onMouseMove={handleMouseMove}
-            onAnimationEnd={handleAnimationEnd}
-            onClick={handleClick}
+            onClick={props.onClick}
         >
             {props.startIcon && <span className={styles.icon}>{props.startIcon}</span>}
             <span>{props.children}</span>
