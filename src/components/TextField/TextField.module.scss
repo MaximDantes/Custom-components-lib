@@ -32,15 +32,15 @@
 .label {
     color: rgba(0, 0, 0, 0.6);
     position: absolute;
-    left: 0;
-    top: 0;
-    transform: translate(14px, 16px) scale(1);
+    left: 10px;
+    top: 15px;
+    padding: 0 4px;
     pointer-events: none;
-    text-transform: capitalize;
-    transition: transform 0.2s;
-    max-width: 100px;
+    transition: font-size 0.2s, top 0.2s;
+    max-width: calc(100% - 20px);
     text-overflow: ellipsis;
-    //TODO wrap
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .input {
@@ -54,6 +54,7 @@
     padding: 16px 14px;
     outline: none;
     border: none;
+    width: 100%;
 }
 
 .error-text {
@@ -106,28 +107,34 @@
     }
 
     .label {
-        transform: translate(0, 20px) scale(1);
+        left: 0;
+        top: 20px;
+        padding: 0;
+        max-width: 100%;
     }
+}
+
+.not-empty .label {
+    font-size: 0.75rem;
 }
 
 .not-empty.outlined {
     .label {
         //TODO transparent border
-        transform: translate(9px, -9px) scale(0.75);
+        top: -10px;
         background-color: #fff;
     }
 }
 
 .not-empty.filled {
     .label {
-        //TODO left padding in storybook
-        transform: translate(9px, 7px) scale(0.75);
+        top: 5px;
     }
 }
 
 .not-empty.standard {
     .label {
-        transform: translate(-8px, -3px) scale(0.75);
+        top: -4px;
     }
 }
 
@@ -139,7 +146,6 @@
 
 .focused.outlined {
     border: 2px solid #1565c0;
-    border-radius: 4px;
 
     .input {
         border: 1px solid transparent;
@@ -172,7 +178,6 @@
 }
 
 .error {
-    //TODO handle long message
     .label {
         color: #d32f2f;
     }
@@ -182,14 +187,16 @@
     }
 
     .outlined {
+        .input {
+            border-color: #d32f2f;
+        }
+    }
+
+    .focused.outlined {
         border-color: #d32f2f;
 
         .input {
-            border-color: #d32f2f;
-
-            &:hover {
-                border-color: #d32f2f;
-            }
+            border-color: transparent;
         }
     }
 
@@ -200,6 +207,10 @@
     .filled,
     .standard {
         border-color: #d32f2f;
+    }
+
+    .standard ~ .error-text {
+        margin: 3px 0 0;
     }
 }
 

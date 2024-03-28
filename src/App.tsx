@@ -1,14 +1,67 @@
 import { FC, useState } from 'react'
-import MySwitch from '@/components/Switch/Switch'
-import { Switch } from '@mui/material'
+import MyTextField from '@/components/TextField/TextField'
+import { TextField } from '@mui/material'
 
 const App: FC = () => {
-    const [checked, setChecked] = useState(false)
+    const [value, setValue] = useState('')
 
     return (
         <>
-            <MySwitch label={'ggregre'} checked={checked} onChange={(checked) => setChecked(checked)} />
-            <Switch checked={checked} onChange={(e) => setChecked(e.target.checked)} />
+            <TextField
+                value={value}
+                onChange={(e) => setValue(e.currentTarget.value)}
+                label={'wdwdw'}
+                error
+                helperText={
+                    'frrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrfffffffff frrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrr rrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrr rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrfffffffff frefer f qwerrrrrrrrrrrr fffffffffff'
+                }
+            />
+            <MyTextField
+                value={value}
+                onChange={(e) => setValue(e.currentTarget.value)}
+                label={'dede'}
+                error={
+                    'frrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrfffffffff frrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrr rrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrr rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrfffffffff frefer f qwerrrrrrrrrrrr fffffffffff'
+                }
+            />
+            <TextField
+                value={value}
+                onChange={(e) => setValue(e.currentTarget.value)}
+                label={'wdwdw'}
+                error
+                helperText={
+                    'frrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrfffffffff frrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrr rrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrr rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrfffffffff frefer f qwerrrrrrrrrrrr fffffffffff'
+                }
+                variant={'filled'}
+            />
+            <MyTextField
+                value={value}
+                onChange={(e) => setValue(e.currentTarget.value)}
+                label={'dede'}
+                error={
+                    'frrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrfffffffff frrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrr rrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrr rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrfffffffff frefer f qwerrrrrrrrrrrr fffffffffff'
+                }
+                variant={'filled'}
+            />
+            <TextField
+                value={value}
+                onChange={(e) => setValue(e.currentTarget.value)}
+                label={'wdwdw'}
+                error
+                helperText={
+                    'frrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrfffffffff frrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrr rrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrr rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrfffffffff frefer f qwerrrrrrrrrrrr fffffffffff'
+                }
+                variant={'standard'}
+            />
+            <MyTextField
+                value={value}
+                onChange={(e) => setValue(e.currentTarget.value)}
+                label={'dede'}
+                error={
+                    'frrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrfffffffff frrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrr rrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrr rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrffffffffffrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrfffffffff frefer f qwerrrrrrrrrrrr fffffffffff'
+                }
+                variant={'standard'}
+            />
         </>
     )
 }
