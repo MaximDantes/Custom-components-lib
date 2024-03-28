@@ -24,11 +24,22 @@ const App: FC = () => {
                 onChange={(value) => setValue(value)}
                 label={'ffffffrf frfrfr'}
                 fullWidth
+                disabled
+            />
+            <MySelect
+                open={open}
+                value={value}
+                options={options}
+                onToggle={(open) => setOpen(open)}
+                onChange={(value) => setValue(value)}
+                label={'ffffffrf frfrfr'}
+                fullWidth
             />
 
             <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Age</InputLabel>
                 <Select
+                    disabled
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={value}

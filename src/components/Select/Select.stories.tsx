@@ -7,6 +7,8 @@ type PresentationProps = {
     options: Option[]
     label?: string
     fullWidth?: boolean
+    disabled?: boolean
+    variant?: 'outlined' | 'filled' | 'standard'
 }
 
 const Presentation: FC<PresentationProps> = (props) => {
@@ -54,5 +56,10 @@ export const Default: Story = {}
 export const FullWidth: Story = {
     args: {
         fullWidth: true,
+    },
+}
+export const Disabled: Story = {
+    args: {
+        disabled: true,
     },
 }

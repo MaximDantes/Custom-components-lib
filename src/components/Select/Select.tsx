@@ -13,6 +13,7 @@ type Props = {
     variant?: 'outlined' | 'filled' | 'standard'
     label?: string
     fullWidth?: boolean
+    disabled?: boolean
 }
 
 const Select: FC<Props> = (props) => {
@@ -22,7 +23,7 @@ const Select: FC<Props> = (props) => {
     const optionsContainer = useRef<HTMLDivElement>()
 
     useLayoutEffect(() => {
-        if (!props.open) return
+        if (!props.open || props.disabled) return
         optionsContainer.current.style.setProperty('--y', container.current.getBoundingClientRect().bottom + 'px')
         optionsContainer.current.style.setProperty('--x', container.current.getBoundingClientRect().left + 8 + 'px')
         optionsContainer.current.style.setProperty('--width', container.current.clientWidth + 'px')
@@ -35,9 +36,11 @@ const Select: FC<Props> = (props) => {
     if (props.open) {
         containerStyles.push(styles.open)
     }
+    if (props.disabled) {
+        containerStyles.push(styles.disabled)
+    }
 
     const handleClick = () => {
-        setUserSelection(-1)
         props.onToggle(!props.open)
     }
 
@@ -52,7 +55,6 @@ const Select: FC<Props> = (props) => {
 
     const handleKeyDown = (e: KeyboardEvent) => {
         if ((e.key === 'Space' || e.key === 'Enter') && !props.open) {
-            setUserSelection(-1)
             props.onToggle(true)
             return
         }
@@ -92,12 +94,14 @@ const Select: FC<Props> = (props) => {
                     fullWidth={props.fullWidth}
                     value={props.value === null ? '' : props.options.find((item) => item.value === props.value)?.title}
                     onChange={() => {}}
+                    disabled={props.disabled}
                     select
                     readOnly
                 />
             </div>
 
-            {props.open &&
+            {!props.disabled &&
+                props.open &&
                 createPortal(
                     <Options
                         options={props.options}

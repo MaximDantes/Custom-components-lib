@@ -36,7 +36,7 @@ const Options = forwardRef<HTMLDivElement, Props>((props, ref) => {
                     classList.push(styles.selected)
                 }
                 if (index === props.userSelection) {
-                    classList.push(styles.selected)
+                    classList.push(styles['user-selected'])
                 }
 
                 return (
