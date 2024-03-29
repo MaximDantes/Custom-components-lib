@@ -64,7 +64,7 @@ const TextField: FC<Props> = (props) => {
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (props.disabled) return
+        if (props.disabled || props.readOnly) return
 
         props.onChange(e)
     }
