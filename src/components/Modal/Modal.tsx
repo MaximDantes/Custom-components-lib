@@ -8,14 +8,14 @@ type Props = {
     children?: ReactElement | ReactElement[]
 }
 
-const Modal: FC<Props> = (props) => {
+const Modal: FC<Props> = ({ open, onClose, children }) => {
     const trigger = useRef<HTMLButtonElement>()
     const initialFocus = useRef<HTMLDivElement>()
     const container = useRef<HTMLDivElement>()
     const closeButton = useRef<HTMLButtonElement>()
 
     useEffect(() => {
-        if (props.open) {
+        if (open) {
             trigger.current = document.activeElement as HTMLButtonElement
             initialFocus.current.focus()
             document.body.style.overflow = 'hidden'
@@ -26,18 +26,18 @@ const Modal: FC<Props> = (props) => {
             trigger.current?.focus()
             trigger.current = null
         }
-    }, [props.open])
-    if (!props.open) return
+    }, [open])
+    if (!open) return
 
     const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
         if (e.key === 'Escape') {
-            props.onClose()
+            onClose()
         }
     }
 
     const handleClick = (e: MouseEvent<HTMLInputElement>) => {
         if (e.target === e.currentTarget) {
-            props.onClose()
+            onClose()
         }
     }
 
@@ -74,14 +74,14 @@ const Modal: FC<Props> = (props) => {
             <div ref={initialFocus} tabIndex={-1} aria-hidden onKeyDown={moveFocusToEnd} />
 
             <div ref={container} className={styles.container} onKeyDown={moveFocusToEnd} onClick={handleClick}>
-                {props.children}
+                {children}
             </div>
 
             <button
                 ref={closeButton}
                 aria-label={'close'}
                 className={styles['close-button']}
-                onClick={props.onClose}
+                onClick={onClose}
                 onKeyDown={moveFocusToStart}
             />
         </div>

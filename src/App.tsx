@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import { Button } from '@/components/Button'
-import Modal from '@/components/Modal/Modal'
+import { Modal } from '@/components/Modal'
 
 const App: FC = () => {
     const [open, setOpen] = useState(false)

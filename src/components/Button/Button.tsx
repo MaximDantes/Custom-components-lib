@@ -16,16 +16,16 @@ type Props = Partial<{
 
 const cx = classNames.bind(styles)
 
-const Button: FC<Props> = (props) => {
+const Button: FC<Props> = ({ variant, size, disabled, startIcon, endIcon, children, tabIndex, type, onClick }) => {
     const ref = useRef<HTMLButtonElement>()
 
     const className = cx({
         button: true,
-        contained: !props.variant,
-        [props.variant]: props.variant,
-        medium: !props.variant,
-        [props.size]: props.size,
-        disabled: props.disabled,
+        contained: !variant,
+        [variant]: variant,
+        medium: !size,
+        [size]: size,
+        disabled,
     })
 
     const handleMouseMove = (e: MouseEvent<HTMLButtonElement>) => {
@@ -37,17 +37,17 @@ const Button: FC<Props> = (props) => {
         <button
             ref={ref}
             className={className}
-            tabIndex={props.tabIndex ?? undefined}
-            type={props.type ?? 'button'}
-            disabled={props.disabled}
+            tabIndex={tabIndex ?? undefined}
+            type={type ?? 'button'}
+            disabled={disabled}
             onMouseMove={handleMouseMove}
-            onClick={props.onClick}
+            onClick={onClick}
         >
-            {props.startIcon && <span className={styles.icon}>{props.startIcon}</span>}
+            {startIcon && <span className={styles.icon}>{startIcon}</span>}
 
-            <span>{props.children}</span>
+            <span>{children}</span>
 
-            {props.endIcon && <span className={styles.icon}>{props.endIcon}</span>}
+            {endIcon && <span className={styles.icon}>{endIcon}</span>}
         </button>
     )
 }

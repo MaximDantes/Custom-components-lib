@@ -34,7 +34,7 @@ const SelectWrapper: FC<WrapperProps> = (props) => {
     )
 }
 
-const getSelect = () => screen.getByRole('select')
+const getSelect = () => screen.getByRole('combobox')
 
 describe('Select', () => {
     it('should render without errors', () => {

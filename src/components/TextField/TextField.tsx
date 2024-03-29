@@ -16,12 +16,12 @@ type Props = {
     readOnly?: boolean
 }
 
-const TextField: FC<Props> = (props) => {
+const TextField: FC<Props> = ({ value, onChange, variant, label, disabled, error, fullWidth, select, readOnly }) => {
     const ref = useRef<HTMLDivElement>()
-    const value = props.disabled ? '' : props.value
+    const inputValue = disabled ? '' : value
 
     useEffect(() => {
-        if (props.value) {
+        if (value) {
             ref.current.classList.add(styles['not-empty'])
             return
         }
@@ -29,17 +29,17 @@ const TextField: FC<Props> = (props) => {
         if (!ref.current.classList.contains(styles.focused)) {
             ref.current.classList.remove(styles['not-empty'])
         }
-    }, [value, props.variant])
+    }, [inputValue, variant])
 
     const handleFocus = () => {
-        if (props.disabled) return
+        if (disabled) return
 
         ref.current.classList.add(styles.focused)
         ref.current.classList.add(styles['not-empty'])
     }
 
     const handleBlur = () => {
-        if (!props.value) {
+        if (!value) {
             ref.current.classList.remove(styles['not-empty'])
         }
         ref.current.classList.remove(styles.focused)
@@ -47,42 +47,42 @@ const TextField: FC<Props> = (props) => {
 
     const containerClassName = cx({
         container: true,
-        error: props.error,
-        ['full-width']: props.fullWidth,
-        disabled: props.disabled,
-        select: props.select,
+        error,
+        ['full-width']: fullWidth,
+        disabled,
+        select,
     })
 
     const textFieldClassName = cx({
         ['text-field']: true,
-        outlined: !props.variant,
-        [props.variant]: props.variant,
+        outlined: !variant,
+        [variant]: variant,
     })
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (props.disabled || props.readOnly) return
+        if (disabled || readOnly) return
 
-        props.onChange(e)
+        onChange(e)
     }
 
     return (
         <div className={containerClassName}>
             <div className={textFieldClassName} ref={ref}>
-                {props.label && <label className={styles.label}>{props.label}</label>}
+                {label && <label className={styles.label}>{label}</label>}
 
                 <input
                     className={styles.input}
-                    value={value}
+                    value={inputValue}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    disabled={props.disabled}
-                    role={props.select && 'select'}
-                    readOnly={props.readOnly}
+                    disabled={disabled}
+                    role={select && 'combobox'}
+                    readOnly={readOnly}
                 />
             </div>
 
-            <label className={styles['error-text']}>{props.error}</label>
+            <label className={styles['error-text']}>{error}</label>
         </div>
     )
 }

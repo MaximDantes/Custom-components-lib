@@ -12,16 +12,16 @@ type Props = {
     label?: string
 }
 
-const Checkbox: FC<Props> = (props) => {
+const Checkbox: FC<Props> = ({ checked, onChange, disabled, label }) => {
     //TODO animation
     const ref = useRef<HTMLLabelElement>()
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (props.disabled) return
+        if (disabled) return
 
         // ref.current.blur()
 
         ref.current.classList.add(styles.animated)
-        props.onChange?.(e.target.checked)
+        onChange?.(e.target.checked)
     }
 
     const handleAnimationEnd = () => {
@@ -36,34 +36,27 @@ const Checkbox: FC<Props> = (props) => {
         ref.current.classList.remove(styles.focused)
     }
 
-    const containerClassName = cx({
-        container: true,
-        disabled: props.disabled,
-    })
-
-    const checkboxClassName = cx({
-        checkbox: true,
-        unchecked: !props.checked,
-    })
+    const containerClassName = cx({ container: true, disabled })
+    const checkboxClassName = cx({ checkbox: true, unchecked: !checked })
 
     return (
         <label className={containerClassName}>
             <input
-                checked={props.checked}
-                disabled={props.disabled}
+                checked={checked}
+                disabled={disabled}
                 type={'checkbox'}
                 className={styles.input}
                 onChange={handleChange}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                tabIndex={props.disabled ? -1 : undefined}
+                tabIndex={disabled ? -1 : undefined}
             />
 
             <span className={checkboxClassName} ref={ref} onAnimationEnd={handleAnimationEnd}>
                 <Icon className={styles.icon} />
             </span>
 
-            <span className={styles.label}>{props.label}</span>
+            <span className={styles.label}>{label}</span>
         </label>
     )
 }

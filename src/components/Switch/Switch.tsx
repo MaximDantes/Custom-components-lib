@@ -11,16 +11,13 @@ type Props = {
     disabled?: boolean
 }
 
-const Switch: FC<Props> = (props) => {
+const Switch: FC<Props> = ({ checked, onChange, label, disabled }) => {
     const ref = useRef<HTMLSpanElement>()
 
-    const className = cx({
-        container: true,
-        checked: props.checked,
-        disabled: props.disabled,
-    })
+    const className = cx({ container: true, checked, disabled })
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        props.onChange(e.currentTarget.checked)
+        onChange(e.currentTarget.checked)
     }
 
     const handleFocus = () => {
@@ -39,18 +36,18 @@ const Switch: FC<Props> = (props) => {
                 <span className={styles.circle} />
             </span>
 
-            {props.label}
+            {label}
 
             <input
                 className={styles.input}
                 type={'checkbox'}
                 role={'switch'}
-                disabled={props.disabled}
-                checked={props.checked}
+                disabled={disabled}
+                checked={checked}
                 onChange={handleChange}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                tabIndex={props.disabled ? -1 : undefined}
+                tabIndex={disabled ? -1 : undefined}
             />
         </label>
     )
