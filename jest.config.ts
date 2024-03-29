@@ -4,6 +4,7 @@ export default {
     moduleNameMapper: {
         '@/(.*)$': '<rootDir>/src/$1',
         '\\.(css|scss)$': 'identity-obj-proxy',
+        '\\.svg$': '<rootDir>/__mocks__/svg.ts',
     },
     setupFilesAfterEnv: ['./setup-tests.ts'],
 

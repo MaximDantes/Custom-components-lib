@@ -6,8 +6,6 @@ import userEvent from '@testing-library/user-event'
 const getButton = () => screen.getByRole('button')
 
 describe('Button', () => {
-    //TODO icons test
-
     it('should render without errors', () => {
         render(<Button>{'button'}</Button>)
 

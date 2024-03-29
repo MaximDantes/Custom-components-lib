@@ -2,12 +2,12 @@ import React, { ChangeEvent, FC, useRef } from 'react'
 import styles from './Checkbox.module.scss'
 import Icon from './checked-icon.svg'
 
-type Props = Partial<{
+type Props = {
     checked: boolean
-    disabled: boolean
-    label: string
     onChange: (checked: boolean) => void
-}>
+    disabled?: boolean
+    label?: string
+}
 
 const Checkbox: FC<Props> = (props) => {
     //TODO animation
@@ -42,6 +42,8 @@ const Checkbox: FC<Props> = (props) => {
     return (
         <label className={containerStyles.join(' ')}>
             <input
+                checked={props.checked}
+                disabled={props.disabled}
                 type={'checkbox'}
                 className={styles.input}
                 onChange={handleChange}
