@@ -41,26 +41,30 @@ const Modal: FC<Props> = (props) => {
         }
     }
 
+    const getFirstFocusable = () => {
+        return container.current.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )[0] as HTMLButtonElement
+    }
+
     const moveFocusToStart = (e: KeyboardEvent<HTMLButtonElement>) => {
         if (e.ctrlKey || e.altKey || e.shiftKey) return
 
         if (e.key === 'Tab') {
-            initialFocus.current.focus()
+            e.preventDefault()
+            getFirstFocusable().focus()
         }
     }
 
     const moveFocusToEnd = (e: KeyboardEvent<HTMLDivElement>) => {
         if (document.activeElement !== initialFocus.current) {
-            const firstFocusable = container.current.querySelectorAll(
-                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-            )[0]
-
-            if (document.activeElement !== firstFocusable) return
+            if (document.activeElement !== getFirstFocusable()) return
         }
 
         if (e.ctrlKey || e.altKey) return
 
         if (e.key === 'Tab' && e.shiftKey) {
+            e.preventDefault()
             closeButton.current.focus()
         }
     }
