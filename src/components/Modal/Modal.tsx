@@ -1,11 +1,11 @@
-import React, { FC, ReactElement, useEffect, useRef, KeyboardEvent, MouseEvent } from 'react'
+import React, { FC, KeyboardEvent, MouseEvent, ReactNode, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import styles from './Modal.module.scss'
 
 type Props = {
     open: boolean
     onClose: () => void
-    children?: ReactElement | ReactElement[]
+    children?: ReactNode
 }
 
 const Modal: FC<Props> = ({ open, onClose, children }) => {
