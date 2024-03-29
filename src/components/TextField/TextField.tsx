@@ -1,5 +1,8 @@
 import React, { ChangeEvent, FC, useEffect, useRef } from 'react'
 import styles from './TextField.module.scss'
+import classNames from 'classnames/bind'
+
+const cx = classNames.bind(styles)
 
 type Props = {
     value: string
@@ -42,26 +45,19 @@ const TextField: FC<Props> = (props) => {
         ref.current.classList.remove(styles.focused)
     }
 
-    const textFieldStyles = [styles['text-field']]
-    if (props.variant) {
-        textFieldStyles.push(styles[props.variant])
-    } else {
-        textFieldStyles.push(styles.outlined)
-    }
+    const containerClassName = cx({
+        container: true,
+        error: props.error,
+        ['full-width']: props.fullWidth,
+        disabled: props.disabled,
+        select: props.select,
+    })
 
-    const containerStyles = [styles.container]
-    if (props.error) {
-        containerStyles.push(styles.error)
-    }
-    if (props.fullWidth) {
-        containerStyles.push(styles['full-width'])
-    }
-    if (props.disabled) {
-        containerStyles.push(styles.disabled)
-    }
-    if (props.select) {
-        containerStyles.push(styles.select)
-    }
+    const textFieldClassName = cx({
+        ['text-field']: true,
+        outlined: !props.variant,
+        [props.variant]: props.variant,
+    })
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (props.disabled || props.readOnly) return
@@ -70,8 +66,8 @@ const TextField: FC<Props> = (props) => {
     }
 
     return (
-        <div className={containerStyles.join(' ')}>
-            <div className={textFieldStyles.join(' ')} ref={ref}>
+        <div className={containerClassName}>
+            <div className={textFieldClassName} ref={ref}>
                 {props.label && <label className={styles.label}>{props.label}</label>}
 
                 <input

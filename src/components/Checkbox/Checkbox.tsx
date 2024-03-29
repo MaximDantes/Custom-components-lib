@@ -1,6 +1,9 @@
 import React, { ChangeEvent, FC, useRef } from 'react'
 import styles from './Checkbox.module.scss'
 import Icon from './checked-icon.svg'
+import classNames from 'classnames/bind'
+
+const cx = classNames.bind(styles)
 
 type Props = {
     checked: boolean
@@ -33,14 +36,18 @@ const Checkbox: FC<Props> = (props) => {
         ref.current.classList.remove(styles.focused)
     }
 
-    const containerStyles = [styles.container]
-    if (props.disabled) containerStyles.push(styles.disabled)
+    const containerClassName = cx({
+        container: true,
+        disabled: props.disabled,
+    })
 
-    const checkboxStyles = [styles.checkbox]
-    if (!props.checked) checkboxStyles.push(styles.unchecked)
+    const checkboxClassName = cx({
+        checkbox: true,
+        unchecked: !props.checked,
+    })
 
     return (
-        <label className={containerStyles.join(' ')}>
+        <label className={containerClassName}>
             <input
                 checked={props.checked}
                 disabled={props.disabled}
@@ -52,7 +59,7 @@ const Checkbox: FC<Props> = (props) => {
                 tabIndex={props.disabled ? -1 : undefined}
             />
 
-            <span className={checkboxStyles.join(' ')} ref={ref} onAnimationEnd={handleAnimationEnd}>
+            <span className={checkboxClassName} ref={ref} onAnimationEnd={handleAnimationEnd}>
                 <Icon className={styles.icon} />
             </span>
 

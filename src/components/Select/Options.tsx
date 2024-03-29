@@ -1,5 +1,8 @@
 import React, { forwardRef, MouseEvent } from 'react'
 import styles from './Options.module.scss'
+import classNames from 'classnames/bind'
+
+const cx = classNames.bind(styles)
 
 export type Option = {
     value: number | string | null
@@ -15,10 +18,10 @@ type Props = {
     fullWidth?: boolean
 }
 const Options = forwardRef<HTMLDivElement, Props>((props, ref) => {
-    const containerStyles = [styles['options-container']]
-    if (props.fullWidth) {
-        containerStyles.push(styles['full-width'])
-    }
+    const className = cx({
+        ['options-container']: true,
+        ['full-width']: props.fullWidth,
+    })
 
     const handleMouseDown = (e: MouseEvent) => {
         e.preventDefault()
@@ -29,19 +32,17 @@ const Options = forwardRef<HTMLDivElement, Props>((props, ref) => {
     }
 
     return (
-        <div className={containerStyles.join(' ')} ref={ref} onMouseDown={handleMouseDown}>
+        <div className={className} ref={ref} onMouseDown={handleMouseDown}>
             {props.options.map((item, index) => {
-                const classList = [styles.option]
-                if (item.value === props.selectedValue) {
-                    classList.push(styles.selected)
-                }
-                if (index === props.userSelection) {
-                    classList.push(styles['user-selected'])
-                }
+                const className = cx({
+                    option: true,
+                    selected: item.value === props.selectedValue,
+                    ['user-selected']: index === props.userSelection,
+                })
 
                 return (
                     <option
-                        className={classList.join(' ')}
+                        className={className}
                         key={item.value}
                         value={item.value}
                         onClick={() => handleClick(item.value)}

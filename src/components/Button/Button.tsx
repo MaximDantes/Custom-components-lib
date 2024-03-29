@@ -1,5 +1,6 @@
 import React, { FC, MouseEvent, ReactNode, useRef } from 'react'
 import styles from './Button.module.scss'
+import classNames from 'classnames/bind'
 
 type Props = Partial<{
     variant: 'text' | 'contained' | 'outlined'
@@ -13,24 +14,19 @@ type Props = Partial<{
     onClick: (e: MouseEvent<HTMLButtonElement>) => void
 }>
 
+const cx = classNames.bind(styles)
+
 const Button: FC<Props> = (props) => {
     const ref = useRef<HTMLButtonElement>()
 
-    const classNames = [styles.button]
-
-    if (props.variant) {
-        classNames.push(styles[props.variant])
-    } else {
-        classNames.push(styles.contained)
-    }
-
-    if (props.size) {
-        classNames.push(styles[props.size])
-    } else {
-        classNames.push(styles.medium)
-    }
-
-    if (props.disabled) classNames.push(styles.disabled)
+    const className = cx({
+        button: true,
+        contained: !props.variant,
+        [props.variant]: props.variant,
+        medium: !props.variant,
+        [props.size]: props.size,
+        disabled: props.disabled,
+    })
 
     const handleMouseMove = (e: MouseEvent<HTMLButtonElement>) => {
         ref.current.style.setProperty('--x', e.nativeEvent.offsetX + 'px')
@@ -40,7 +36,7 @@ const Button: FC<Props> = (props) => {
     return (
         <button
             ref={ref}
-            className={classNames.join(' ')}
+            className={className}
             tabIndex={props.tabIndex ?? undefined}
             type={props.type ?? 'button'}
             disabled={props.disabled}
@@ -48,6 +44,7 @@ const Button: FC<Props> = (props) => {
             onClick={props.onClick}
         >
             {props.startIcon && <span className={styles.icon}>{props.startIcon}</span>}
+
             <span>{props.children}</span>
 
             {props.endIcon && <span className={styles.icon}>{props.endIcon}</span>}

@@ -1,8 +1,11 @@
 import React, { FC, KeyboardEvent, useLayoutEffect, useRef, useState } from 'react'
 import TextField from '@/components/TextField/TextField'
 import { createPortal } from 'react-dom'
-import styles from './Select.module.scss'
 import Options, { Option } from '@/components/Select/Options'
+import styles from './Select.module.scss'
+import classNames from 'classnames/bind'
+
+const cx = classNames.bind(styles)
 
 type Props = {
     open: boolean
@@ -29,16 +32,12 @@ const Select: FC<Props> = (props) => {
         optionsContainer.current.style.setProperty('--width', container.current.clientWidth + 'px')
     }, [props.open])
 
-    const containerStyles = [styles.container]
-    if (props.fullWidth) {
-        containerStyles.push(styles['full-width'])
-    }
-    if (props.open) {
-        containerStyles.push(styles.open)
-    }
-    if (props.disabled) {
-        containerStyles.push(styles.disabled)
-    }
+    const className = cx({
+        container: true,
+        ['full-width']: props.fullWidth,
+        open: props.open,
+        disabled: props.disabled,
+    })
 
     const handleClick = () => {
         props.onToggle(!props.open)
@@ -83,7 +82,7 @@ const Select: FC<Props> = (props) => {
         <>
             <div
                 ref={container}
-                className={containerStyles.join(' ')}
+                className={className}
                 onClick={handleClick}
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}

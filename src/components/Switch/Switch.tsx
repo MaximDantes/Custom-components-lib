@@ -1,5 +1,8 @@
 import React, { ChangeEvent, FC, useRef } from 'react'
 import styles from './Switch.module.scss'
+import classNames from 'classnames/bind'
+
+const cx = classNames.bind(styles)
 
 type Props = {
     checked: boolean
@@ -11,14 +14,11 @@ type Props = {
 const Switch: FC<Props> = (props) => {
     const ref = useRef<HTMLSpanElement>()
 
-    const containerStyles = [styles.container]
-    if (props.checked) {
-        containerStyles.push(styles.checked)
-    }
-    if (props.disabled) {
-        containerStyles.push(styles.disabled)
-    }
-
+    const className = cx({
+        container: true,
+        checked: props.checked,
+        disabled: props.disabled,
+    })
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         props.onChange(e.currentTarget.checked)
     }
@@ -32,7 +32,7 @@ const Switch: FC<Props> = (props) => {
     }
 
     return (
-        <label className={containerStyles.join(' ')}>
+        <label className={className}>
             <span className={styles['switch-container']} ref={ref}>
                 <span className={styles.track} />
 
