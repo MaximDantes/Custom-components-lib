@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import TextField from './TextField'
 import { beforeEach, describe, expect, it, jest } from '@jest/globals'
 import { FC, useState } from 'react'
+import { TextField } from './'
 
 type WrapperProps = {
     variant?: 'outlined' | 'filled' | 'standard'

@@ -1,6 +1,6 @@
 import { describe, expect, jest } from '@jest/globals'
 import { render, screen } from '@testing-library/react'
-import Button from '@/components/Button/Button'
+import { Button } from './'
 import userEvent from '@testing-library/user-event'
 
 const getButton = () => screen.getByRole('button')

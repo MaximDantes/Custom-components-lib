@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from './Button'
+import { Button } from './'
 import type { Meta, StoryObj } from '@storybook/react'
 import Svg1 from './../../assets/grade_FILL0_wght400_GRAD0_opsz24.svg'
 import Svg2 from './../../assets/arrow_circle_right_FILL0_wght400_GRAD0_opsz24.svg'

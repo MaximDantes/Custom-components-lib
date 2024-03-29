@@ -1,10 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import Select from './Select'
 import { beforeEach, describe, expect, it, jest } from '@jest/globals'
 import { FC, useState } from 'react'
-import { Option } from '@/components/Select/Options'
+import { Select, Option } from './'
 
 const options: Option[] = [
     { value: null, title: 'none' },

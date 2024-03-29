@@ -1,7 +1,7 @@
 import { describe, expect, jest } from '@jest/globals'
 import { render, screen } from '@testing-library/react'
-import Switch from '@/components/Switch/Switch'
 import userEvent from '@testing-library/user-event'
+import { Switch } from './'
 
 const getSwitch = () => screen.getByRole('switch')
 

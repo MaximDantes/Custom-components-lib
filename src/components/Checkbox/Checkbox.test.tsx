@@ -1,6 +1,6 @@
 import { describe, expect, it, jest } from '@jest/globals'
 import { render, screen } from '@testing-library/react'
-import Checkbox from '@/components/Checkbox/Checkbox'
+import { Checkbox } from './'
 import userEvent from '@testing-library/user-event'
 
 const getCheckbox = () => screen.getByRole('checkbox')

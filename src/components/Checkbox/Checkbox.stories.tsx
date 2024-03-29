@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import Checkbox from './Checkbox'
+import { Checkbox } from './'
 
 type PresentationProps = Partial<{
     label: string

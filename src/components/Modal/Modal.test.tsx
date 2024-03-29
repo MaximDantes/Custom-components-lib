@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, jest } from '@jest/globals'
 import { render, screen } from '@testing-library/react'
-import Modal from '@/components/Modal/Modal'
 import userEvent from '@testing-library/user-event'
 import { FC, useState } from 'react'
-import Button from '@/components/Button/Button'
+import { Modal } from './'
+import { Button } from '@/components/Button'
 
 const getModal = () => screen.getByRole('dialog')
 

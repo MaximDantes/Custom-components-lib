@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import Select from './Select'
-import { Option } from '@/components/Select/Options'
+import { Select, Option } from './'
 
 type PresentationProps = {
     options: Option[]

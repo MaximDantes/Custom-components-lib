@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import Button from '@/components/Button/Button'
+import { Button } from '@/components/Button'
 import Modal from '@/components/Modal/Modal'
 
 const App: FC = () => {

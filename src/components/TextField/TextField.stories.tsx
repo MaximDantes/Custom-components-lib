@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import TextField from './TextField'
+import { TextField } from './'
 
 type PresentationProps = Partial<{
     variant: 'outlined' | 'filled' | 'standard'
