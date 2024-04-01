@@ -8,17 +8,27 @@ import classNames from 'classnames/bind'
 const cx = classNames.bind(styles)
 
 type Props = {
+    /** Set open state*/
     open: boolean
+    /** Function to be called after click on input */
     onToggle: (open: boolean) => void
+    /** Current value of input. Null means that input will be empty */
     value: string | number | null
+    /** Function to be called after select of options */
     onChange: (value: string | number | null) => void
+    /** Variants of option. Format is: { value: number | string | null, title: string } */
     options: Option[]
+    /** Variants of input design. Options are: outlined | filled | standard */
     variant?: 'outlined' | 'filled' | 'standard'
+    /** Text to be used as input placeholder */
     label?: string
+    /** If true, width will be 100%, if false - input default width */
     fullWidth?: boolean
+    /** Set disabled state */
     disabled?: boolean
 }
 
+/** Styled variant of html select. Component must be controlled. Options must be provided as prop */
 const Select: FC<Props> = ({ open, onToggle, value, onChange, options, variant, label, fullWidth, disabled }) => {
     const [userSelection, setUserSelection] = useState(-1)
 

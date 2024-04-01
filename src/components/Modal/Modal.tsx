@@ -3,11 +3,15 @@ import { createPortal } from 'react-dom'
 import styles from './Modal.module.scss'
 
 type Props = {
+    /** Set open state */
     open: boolean
+    /** Function to be called after click on modal background or Escape press */
     onClose: () => void
+    /** Element to be displayed inside modal */
     children?: ReactNode
 }
 
+/** Component to show inner content above entire window. Content must be provided as children */
 const Modal: FC<Props> = ({ open, onClose, children }) => {
     const trigger = useRef<HTMLButtonElement>()
     const initialFocus = useRef<HTMLDivElement>()

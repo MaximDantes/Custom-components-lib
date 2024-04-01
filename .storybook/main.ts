@@ -17,9 +17,6 @@ const config: StorybookConfig = {
         name: '@storybook/react-webpack5',
         options: {},
     },
-    docs: {
-        autodocs: 'tag',
-    },
 
     webpackFinal: (config) => {
         //@ts-ignore
@@ -41,6 +38,10 @@ const config: StorybookConfig = {
         }
 
         return config
+    },
+
+    typescript: {
+        reactDocgen: 'react-docgen-typescript',
     },
 }
 export default config

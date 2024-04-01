@@ -6,12 +6,17 @@ import classNames from 'classnames/bind'
 const cx = classNames.bind(styles)
 
 type Props = {
+    /** Set checked state */
     checked: boolean
+    /** Function to be called after click on checkbox */
     onChange: (checked: boolean) => void
+    /** Set disabled state */
     disabled?: boolean
+    /** Text to be displayed after checkbox */
     label?: string
 }
 
+/** Styled variant on html checkbox. Component must be controlled */
 const Checkbox: FC<Props> = ({ checked, onChange, disabled, label }) => {
     //TODO animation
     const ref = useRef<HTMLLabelElement>()

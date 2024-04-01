@@ -5,12 +5,17 @@ import classNames from 'classnames/bind'
 const cx = classNames.bind(styles)
 
 type Props = {
+    /** Set checked state */
     checked: boolean
+    /** Function to be called after click on checkbox */
     onChange: (checked: boolean) => void
+    /** Text to display after checkbox */
     label?: string
+    /** Set disabled state */
     disabled?: boolean
 }
 
+/** Input widget that allows user one of two values: on of off */
 const Switch: FC<Props> = ({ checked, onChange, label, disabled }) => {
     const ref = useRef<HTMLSpanElement>()
 
