@@ -3,6 +3,7 @@ import TextField from '@/components/TextField/TextField'
 import { createPortal } from 'react-dom'
 import Options, { Option } from '@/components/Select/Options'
 import styles from './Select.module.scss'
+import optionStyles from './Options.module.scss'
 import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
@@ -55,7 +56,12 @@ const Select: FC<Props> = ({ open, onToggle, value, onChange, options, variant, 
 
     const handleSelect = (value: string | number | null) => {
         onChange(value)
-        onToggle(false)
+
+        optionsContainer.current.classList.add(optionStyles.unmounted)
+
+        setTimeout(() => {
+            onToggle(false)
+        }, 130)
     }
 
     const handleBlur = () => {
