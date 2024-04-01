@@ -2,6 +2,7 @@ import { StorybookConfig } from '@storybook/react-webpack5'
 import svgrOptions from '../config/build/svgr/svgr-options'
 import path from 'path'
 
+//@ts-ignore
 const config: StorybookConfig = {
     stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
     addons: [

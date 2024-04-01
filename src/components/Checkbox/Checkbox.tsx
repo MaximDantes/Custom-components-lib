@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useRef } from 'react'
+import React, { ChangeEvent, FC } from 'react'
 import styles from './Checkbox.module.scss'
 import Icon from './checked-icon.svg'
 import classNames from 'classnames/bind'
@@ -18,27 +18,10 @@ type Props = {
 
 /** Styled variant on html checkbox. Component must be controlled */
 const Checkbox: FC<Props> = ({ checked, onChange, disabled, label }) => {
-    //TODO animation
-    const ref = useRef<HTMLLabelElement>()
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (disabled) return
 
-        // ref.current.blur()
-
-        ref.current.classList.add(styles.animated)
         onChange?.(e.target.checked)
-    }
-
-    const handleAnimationEnd = () => {
-        ref.current.classList.remove(styles.animated)
-    }
-
-    const handleFocus = () => {
-        ref.current.classList.add(styles.focused)
-    }
-
-    const handleBlur = () => {
-        ref.current.classList.remove(styles.focused)
     }
 
     const containerClassName = cx({ container: true, disabled })
@@ -52,12 +35,10 @@ const Checkbox: FC<Props> = ({ checked, onChange, disabled, label }) => {
                 type={'checkbox'}
                 className={styles.input}
                 onChange={handleChange}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
                 tabIndex={disabled ? -1 : undefined}
             />
 
-            <span className={checkboxClassName} ref={ref} onAnimationEnd={handleAnimationEnd}>
+            <span className={checkboxClassName}>
                 <Icon className={styles.icon} />
             </span>
 

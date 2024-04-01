@@ -1,21 +1,14 @@
 import { FC, useState } from 'react'
-import { Button } from '@/components/Button'
-import { Modal } from '@/components/Modal'
+import { Checkbox as MyCheckbox } from '@/components/Checkbox'
+import { Checkbox } from '@mui/material'
 
 const App: FC = () => {
     const [open, setOpen] = useState(false)
 
     return (
         <>
-            <Button onClick={() => setOpen(true)}>{'open'}</Button>
-
-            <Modal open={open} onClose={() => setOpen(false)}>
-                <div>
-                    <Button>{'button 1'}</Button>
-                    <Button>{'button 2'}</Button>
-                </div>
-                <Button>{'button 3'}</Button>
-            </Modal>
+            <MyCheckbox checked={open} onChange={setOpen} label={'frferfer fefre'} />
+            <Checkbox checked={open} onChange={(e) => setOpen(e.target.checked)} />
         </>
     )
 }
