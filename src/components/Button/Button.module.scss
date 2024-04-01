@@ -48,7 +48,6 @@
     }
 
     &:active::before {
-        //TODO animation scale
         transform: translate(-50%, -50%) scale(2.5);
         transition: 0.2s;
     }

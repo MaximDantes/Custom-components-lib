@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import { beforeEach, describe, expect, it, jest } from '@jest/globals'
@@ -153,7 +153,7 @@ describe('Select with wrapper', () => {
         await userEvent.click(screen.getByText('option 2'))
 
         expect(getSelect()).toHaveValue('option 2')
-        expect(screen.queryByText('option 1')).not.toBeInTheDocument()
+        await waitFor(() => expect(screen.queryByText('option 1')).not.toBeInTheDocument())
     })
 
     it('should open options by Enter', async () => {

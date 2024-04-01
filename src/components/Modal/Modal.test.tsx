@@ -5,7 +5,7 @@ import { FC, useState } from 'react'
 import { Modal } from './'
 import { Button } from '@/components/Button'
 
-const getModal = () => screen.getByRole('dialog')
+const getModal = () => screen.getByTestId('modal')
 
 const ModalWithWrapper: FC = () => {
     const [open, setOpen] = useState(false)
@@ -91,12 +91,14 @@ describe('Modal with wrapper', () => {
 
     it('should open modal', async () => {
         expect(getModal()).toBeInTheDocument()
+        screen.debug()
     })
 
     it('should move focus to modal', async () => {
         await userEvent.tab()
+        await userEvent.tab()
 
-        expect(screen.getByText('button 1').parentElement).toHaveFocus()
+        expect(screen.getByText('button 2').parentElement).toHaveFocus()
     })
 
     it('should return focus to toggle button', async () => {

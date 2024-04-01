@@ -31,9 +31,10 @@ const Modal: FC<Props> = ({ open, onClose, children }) => {
             trigger.current = null
         }
     }, [open])
+
     if (!open) return
 
-    const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    const handleKeyDown = (e: KeyboardEvent<HTMLDialogElement>) => {
         if (e.key === 'Escape') {
             onClose()
         }
@@ -74,7 +75,7 @@ const Modal: FC<Props> = ({ open, onClose, children }) => {
     }
 
     const modal = (
-        <div role={'dialog'} aria-modal className={styles.modal} onKeyDown={handleKeyDown}>
+        <dialog open data-testid={'modal'} aria-modal className={styles.modal} onKeyDown={handleKeyDown} tabIndex={-1}>
             <div ref={initialFocus} tabIndex={-1} aria-hidden onKeyDown={moveFocusToEnd} />
 
             <div ref={container} className={styles.container} onKeyDown={moveFocusToEnd} onClick={handleClick}>
@@ -88,7 +89,7 @@ const Modal: FC<Props> = ({ open, onClose, children }) => {
                 onClick={onClose}
                 onKeyDown={moveFocusToStart}
             />
-        </div>
+        </dialog>
     )
 
     return createPortal(modal, document.body)
