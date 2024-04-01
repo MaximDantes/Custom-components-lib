@@ -12,8 +12,8 @@ const App: FC = () => {
                 label={'423432'}
                 error={'error'}
             />
-            <TextField value={value} onChange={(e) => setValue(e.currentTarget.value)} label={'423432'} />
-            <TextField value={value} onChange={(e) => setValue(e.currentTarget.value)} label={'423432'} />
+            <TextField label={'423432'} disabled />
+            <TextField value={value} onChange={(e) => setValue(e.currentTarget.value)} label={'423432'} disabled />
         </>
     )
 }

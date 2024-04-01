@@ -1,24 +1,9 @@
-import React, { FC, useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { TextField } from './'
 
-type PresentationProps = Partial<{
-    variant: 'outlined' | 'filled' | 'standard'
-    label: string
-    error: string
-    disabled: boolean
-    fullWidth: boolean
-}>
-
-const Presentation: FC<PresentationProps> = (props) => {
-    const [value, setValue] = useState('')
-
-    return <TextField {...props} value={value} onChange={(e) => setValue(e.currentTarget.value)} />
-}
-
-const meta: Meta<typeof Presentation> = {
+const meta: Meta<typeof TextField> = {
     title: 'Components/TextField',
-    component: Presentation,
+    component: TextField,
     argTypes: {
         variant: {
             options: ['outlined', 'filled', 'standard'],
@@ -29,7 +14,7 @@ const meta: Meta<typeof Presentation> = {
 
 export default meta
 
-type Story = StoryObj<typeof Presentation>
+type Story = StoryObj<typeof TextField>
 
 export const Default: Story = {
     args: {

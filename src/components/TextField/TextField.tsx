@@ -4,28 +4,28 @@ import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
-type Props = {
+type Props = Partial<{
     /** Text inside input */
     value: string
     /** Function to be called after typing in input */
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
     /** Variants of input design. Options are: outlined, filled, standard */
-    variant?: 'outlined' | 'filled' | 'standard'
+    variant: 'outlined' | 'filled' | 'standard'
     /** Text ot be used as input placeholder */
-    label?: string
+    label: string
     /** Set disabled state */
-    disabled?: boolean
+    disabled: boolean
     /** Text to be used as error */
-    error?: string
+    error: string
     /** If true, width will be 100%, if false - input default width */
-    fullWidth?: boolean
+    fullWidth: boolean
     /** Prop to be used only inside Select component */
-    select?: boolean
+    select: boolean
     /** Set read only state */
-    readOnly?: boolean
-}
+    readOnly: boolean
+}>
 
-/** Styled variant on html input. Component must be controlled */
+/** Styled variant on html input */
 const TextField: FC<Props> = ({ value, onChange, variant, label, disabled, error, fullWidth, select, readOnly }) => {
     const containerClassName = cx({
         container: true,
@@ -44,7 +44,7 @@ const TextField: FC<Props> = ({ value, onChange, variant, label, disabled, error
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (disabled || readOnly) return
 
-        onChange(e)
+        onChange?.(e)
     }
 
     return (
