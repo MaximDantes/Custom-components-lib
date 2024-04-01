@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC } from 'react'
+import '@/App.module.scss'
 import styles from './TextField.module.scss'
 import classNames from 'classnames/bind'
 
@@ -52,7 +53,7 @@ const TextField: FC<Props> = ({ value, onChange, variant, label, disabled, error
             <div className={textFieldClassName}>
                 <input
                     className={styles.input}
-                    value={disabled ? '' : value}
+                    value={disabled ? '' : value || undefined}
                     onChange={handleChange}
                     disabled={disabled}
                     role={select && 'combobox'}

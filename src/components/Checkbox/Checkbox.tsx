@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC } from 'react'
+import '@/App.module.scss'
 import styles from './Checkbox.module.scss'
 import Icon from './checked-icon.svg'
 import classNames from 'classnames/bind'

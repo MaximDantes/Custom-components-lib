@@ -91,16 +91,16 @@
 
 .checked {
     .track {
-        background-color: #1976d2;
+        background-color: var(--primary-color);
         opacity: 0.5;
     }
 
     .circle {
         transform: translateX(100%);
-        background-color: #1976d2;
+        background-color: var(--primary-color);
 
         &::after {
-            background-color: #1976d2;
+            background-color: var(--primary-color);
         }
     }
 }

@@ -23,7 +23,7 @@
         left: 0;
         right: 0;
         bottom: -1px;
-        border-bottom: 2px solid #1976d2;
+        border-bottom: 2px solid var(--primary-color);
         transform: scaleX(0);
         transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1) 0s;
     }
@@ -63,7 +63,7 @@
 }
 
 .error-text {
-    color: #d32f2f;
+    color: var(--error);
     font-size: 0.75rem;
     display: none;
     margin: 3px 14px 0;
@@ -137,12 +137,12 @@
 
 .container:not(.error) {
     .input:focus-visible ~ .label {
-        color: #1976d2;
+        color: var(--primary-color);
     }
 
     .outlined {
         &:has(> .input:focus-visible) {
-            border: 2px solid #1565c0;
+            border: 2px solid var(--primary-color);
 
             .input {
                 border: 1px solid transparent;
@@ -183,7 +183,7 @@
 
 .error {
     .label {
-        color: #d32f2f;
+        color: var(--error);
     }
 
     .error-text {
@@ -192,17 +192,17 @@
 
     .outlined {
         .input {
-            border-color: #d32f2f;
+            border-color: var(--error);
         }
     }
 
     .text-field::after {
-        border-color: #d32f2f;
+        border-color: var(--error);
     }
 
     .filled,
     .standard {
-        border-color: #d32f2f;
+        border-color: var(--error);
     }
 
     .standard ~ .error-text {
