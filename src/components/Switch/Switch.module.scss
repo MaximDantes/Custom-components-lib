@@ -1,5 +1,3 @@
-//TODO animation
-
 .container {
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     font-weight: 400;
@@ -37,6 +35,25 @@
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 1;
+
+    &:focus-visible ~ .switch-container .circle::after {
+        transform: scale(1.8);
+        opacity: 0.2;
+    }
+
+    &:active ~ .switch-container .circle::after {
+        animation: click 0.5s;
+    }
+}
+
+@keyframes click {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.8);
+    }
 }
 
 .track {
@@ -113,13 +130,5 @@
 .disabled.checked {
     .circle {
         background-color: #a7caed;
-    }
-}
-
-.focused {
-    .circle {
-        &::after {
-            transform: scale(1.8);
-        }
     }
 }
