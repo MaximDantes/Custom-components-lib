@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useEffect, useRef } from 'react'
+import React, { ChangeEvent, FC } from 'react'
 import styles from './TextField.module.scss'
 import classNames from 'classnames/bind'
 
@@ -27,34 +27,6 @@ type Props = {
 
 /** Styled variant on html input. Component must be controlled */
 const TextField: FC<Props> = ({ value, onChange, variant, label, disabled, error, fullWidth, select, readOnly }) => {
-    const ref = useRef<HTMLDivElement>()
-    const inputValue = disabled ? '' : value
-
-    useEffect(() => {
-        if (value) {
-            ref.current.classList.add(styles['not-empty'])
-            return
-        }
-
-        if (!ref.current.classList.contains(styles.focused)) {
-            ref.current.classList.remove(styles['not-empty'])
-        }
-    }, [inputValue, variant])
-
-    const handleFocus = () => {
-        if (disabled) return
-
-        ref.current.classList.add(styles.focused)
-        ref.current.classList.add(styles['not-empty'])
-    }
-
-    const handleBlur = () => {
-        if (!value) {
-            ref.current.classList.remove(styles['not-empty'])
-        }
-        ref.current.classList.remove(styles.focused)
-    }
-
     const containerClassName = cx({
         container: true,
         error,
@@ -77,19 +49,17 @@ const TextField: FC<Props> = ({ value, onChange, variant, label, disabled, error
 
     return (
         <div className={containerClassName}>
-            <div className={textFieldClassName} ref={ref}>
-                {label && <label className={styles.label}>{label}</label>}
-
+            <div className={textFieldClassName}>
                 <input
                     className={styles.input}
-                    value={inputValue}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
+                    value={disabled ? '' : value}
                     onChange={handleChange}
                     disabled={disabled}
                     role={select && 'combobox'}
                     readOnly={readOnly}
                 />
+
+                {label && <label className={styles.label}>{label}</label>}
             </div>
 
             <label className={styles['error-text']}>{error}</label>

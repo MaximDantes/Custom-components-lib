@@ -55,6 +55,11 @@
     outline: none;
     border: none;
     width: 100%;
+
+    &:not([value='']) ~ .label,
+    &:focus-visible ~ .label {
+        font-size: 0.75rem;
+    }
 }
 
 .error-text {
@@ -76,6 +81,12 @@
         &:hover {
             border-color: #222222;
         }
+
+        &:not([value='']) ~ .label,
+        &:focus-visible ~ .label {
+            top: -10px;
+            background-color: #fff;
+        }
     }
 }
 
@@ -91,6 +102,11 @@
 
     .input {
         padding: 25px 14px 7px;
+
+        &:not([value='']) ~ .label,
+        &:focus-visible ~ .label {
+            top: 5px;
+        }
     }
 }
 
@@ -104,6 +120,11 @@
     .input {
         padding: 4px 0 5px;
         margin-top: 16px;
+
+        &:not([value='']) ~ .label,
+        &:focus-visible ~ .label {
+            top: -4px;
+        }
     }
 
     .label {
@@ -114,57 +135,39 @@
     }
 }
 
-.not-empty .label {
-    font-size: 0.75rem;
-}
-
-.not-empty.outlined {
-    .label {
-        //TODO transparent border
-        top: -10px;
-        background-color: #fff;
-    }
-}
-
-.not-empty.filled {
-    .label {
-        top: 5px;
-    }
-}
-
-.not-empty.standard {
-    .label {
-        top: -4px;
-    }
-}
-
-.focused {
-    .label {
+.container:not(.error) {
+    .input:focus-visible ~ .label {
         color: #1976d2;
     }
-}
 
-.focused.outlined {
-    border: 2px solid #1565c0;
+    .outlined {
+        &:has(> .input:focus-visible) {
+            border: 2px solid #1565c0;
 
-    .input {
-        border: 1px solid transparent;
-    }
-}
-
-.focused.filled {
-    &::after {
-        transform: scaleX(1);
+            .input {
+                border: 1px solid transparent;
+            }
+        }
     }
 
-    &:hover {
-        background-color: rgba(0, 0, 0, 0.06);
+    .standard {
+        &:has(> .input:focus-visible) {
+            &::after {
+                transform: scaleX(1);
+            }
+        }
     }
-}
 
-.focused.standard {
-    &::after {
-        transform: scaleX(1);
+    .filled {
+        &:has(> .input:focus-visible) {
+            &::after {
+                transform: scaleX(1);
+            }
+        }
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.06);
+        }
     }
 }
 
@@ -190,14 +193,6 @@
     .outlined {
         .input {
             border-color: #d32f2f;
-        }
-    }
-
-    .focused.outlined {
-        border-color: #d32f2f;
-
-        .input {
-            border-color: transparent;
         }
     }
 

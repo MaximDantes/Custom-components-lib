@@ -1,18 +1,19 @@
 import { FC, useState } from 'react'
-import { Checkbox as MyCheckbox } from '@/components/Checkbox'
-import { Checkbox, Switch } from '@mui/material'
-import { Switch as MySwitch } from '@/components/Switch'
+import { TextField } from '@/components/TextField'
 
 const App: FC = () => {
-    const [open, setOpen] = useState(false)
+    const [value, setValue] = useState('')
 
     return (
         <>
-            <MyCheckbox checked={open} onChange={setOpen} label={'frferfer fefre'} />
-            <Checkbox checked={open} onChange={(e) => setOpen(e.target.checked)} />
-
-            <MySwitch checked={open} onChange={setOpen} label={'frferfer fefre'} />
-            <Switch checked={open} onChange={(e) => setOpen(e.target.checked)} />
+            <TextField
+                value={value}
+                onChange={(e) => setValue(e.currentTarget.value)}
+                label={'423432'}
+                error={'error'}
+            />
+            <TextField value={value} onChange={(e) => setValue(e.currentTarget.value)} label={'423432'} />
+            <TextField value={value} onChange={(e) => setValue(e.currentTarget.value)} label={'423432'} />
         </>
     )
 }
