@@ -1,5 +1,4 @@
 import React, { ChangeEvent, FC } from 'react'
-import '@/App.module.scss'
 import styles from './TextField.module.scss'
 import classNames from 'classnames/bind'
 
@@ -26,7 +25,7 @@ type Props = Partial<{
     readOnly: boolean
 }>
 
-/** Styled variant on html input */
+/** Styled variant of html input */
 const TextField: FC<Props> = ({ value, onChange, variant, label, disabled, error, fullWidth, select, readOnly }) => {
     const containerClassName = cx({
         container: true,
@@ -53,7 +52,7 @@ const TextField: FC<Props> = ({ value, onChange, variant, label, disabled, error
             <div className={textFieldClassName}>
                 <input
                     className={styles.input}
-                    value={disabled ? '' : value || undefined}
+                    value={disabled ? '' : value === undefined ? undefined : value}
                     onChange={handleChange}
                     disabled={disabled}
                     role={select && 'combobox'}

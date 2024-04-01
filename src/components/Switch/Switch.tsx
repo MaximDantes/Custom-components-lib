@@ -1,5 +1,4 @@
 import React, { ChangeEvent, FC } from 'react'
-import '@/App.module.scss'
 import styles from './Switch.module.scss'
 import classNames from 'classnames/bind'
 
