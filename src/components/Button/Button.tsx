@@ -26,7 +26,17 @@ type Props = Partial<{
 const cx = classNames.bind(styles)
 
 /** Styled variant of html button */
-const Button: FC<Props> = ({ variant, size, disabled, startIcon, endIcon, children, tabIndex, type, onClick }) => {
+export const Button: FC<Props> = ({
+    variant,
+    size,
+    disabled,
+    startIcon,
+    endIcon,
+    children,
+    tabIndex,
+    type,
+    onClick,
+}) => {
     const ref = useRef<HTMLButtonElement>()
 
     const className = cx({
@@ -61,5 +71,3 @@ const Button: FC<Props> = ({ variant, size, disabled, startIcon, endIcon, childr
         </button>
     )
 }
-
-export default Button

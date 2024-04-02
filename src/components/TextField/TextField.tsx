@@ -19,26 +19,37 @@ type Props = Partial<{
     error: string
     /** If true, width will be 100%, if false - input default width */
     fullWidth: boolean
-    /** Prop to be used only inside Select component */
-    select: boolean
+    /** Name of css class to override default settings */
+    className: string
     /** Set read only state */
     readOnly: boolean
 }>
 
 /** Styled variant of html input */
-const TextField: FC<Props> = ({ value, onChange, variant, label, disabled, error, fullWidth, select, readOnly }) => {
+export const TextField: FC<Props> = ({
+    value,
+    onChange,
+    variant,
+    label,
+    disabled,
+    error,
+    fullWidth,
+    className,
+    readOnly,
+}) => {
     const containerClassName = cx({
         container: true,
         error,
         ['full-width']: fullWidth,
         disabled,
-        select,
+        [className]: className,
     })
 
     const textFieldClassName = cx({
         ['text-field']: true,
         outlined: !variant,
         [variant]: variant,
+        fieldset: variant === 'outlined',
     })
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,24 +58,35 @@ const TextField: FC<Props> = ({ value, onChange, variant, label, disabled, error
         onChange?.(e)
     }
 
+    const inner = (
+        <>
+            <input
+                className={styles.input}
+                value={disabled ? '' : value === undefined ? undefined : value}
+                onChange={handleChange}
+                disabled={disabled}
+                role={className && 'combobox'}
+                readOnly={readOnly}
+                placeholder={''}
+            />
+
+            {label && (
+                <>
+                    {variant === 'outlined' && <legend className={styles.legend}>{label}</legend>}
+                    <label className={styles.label}>{label}</label>
+                </>
+            )}
+        </>
+    )
+
     return (
         <div className={containerClassName}>
-            <div className={textFieldClassName}>
-                <input
-                    className={styles.input}
-                    value={disabled ? '' : value === undefined ? undefined : value}
-                    onChange={handleChange}
-                    disabled={disabled}
-                    role={select && 'combobox'}
-                    readOnly={readOnly}
-                />
-
-                {label && <label className={styles.label}>{label}</label>}
-            </div>
-
+            {variant === 'outlined' ? (
+                <fieldset className={textFieldClassName}>{inner}</fieldset>
+            ) : (
+                <div className={textFieldClassName}>{inner}</div>
+            )}
             <label className={styles['error-text']}>{error}</label>
         </div>
     )
 }
-
-export default TextField

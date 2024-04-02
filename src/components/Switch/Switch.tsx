@@ -16,7 +16,7 @@ type Props = {
 }
 
 /** Input widget that allows user one of two values: on of off */
-const Switch: FC<Props> = ({ checked, onChange, label, disabled }) => {
+export const Switch: FC<Props> = ({ checked, onChange, label, disabled }) => {
     const className = cx({ container: true, checked, disabled })
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,5 +45,3 @@ const Switch: FC<Props> = ({ checked, onChange, label, disabled }) => {
         </label>
     )
 }
-
-export default Switch

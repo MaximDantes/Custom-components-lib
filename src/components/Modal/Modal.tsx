@@ -12,7 +12,7 @@ type Props = {
 }
 
 /** Component to show inner content above entire window. Content must be provided as children */
-const Modal: FC<Props> = ({ open, onClose, children }) => {
+export const Modal: FC<Props> = ({ open, onClose, children }) => {
     const trigger = useRef<HTMLButtonElement>()
     const initialFocus = useRef<HTMLDivElement>()
     const container = useRef<HTMLDivElement>()
@@ -94,5 +94,3 @@ const Modal: FC<Props> = ({ open, onClose, children }) => {
 
     return createPortal(modal, document.body)
 }
-
-export default Modal

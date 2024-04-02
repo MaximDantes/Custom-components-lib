@@ -43,6 +43,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    user-select: none;
 }
 
 .input {
@@ -53,12 +54,12 @@
     height: 1.4375em;
     margin: 0;
     display: block;
-    padding: 16px 14px;
+    padding: 14px 14px 16px;
     outline: none;
     border: none;
     width: 100%;
 
-    &:not([value='']) ~ .label,
+    &:not(:placeholder-shown) ~ .label,
     &:focus-visible ~ .label {
         font-size: 0.75rem;
     }
@@ -72,22 +73,29 @@
 }
 
 .outlined {
-    border: 2px solid transparent;
+    border: 2px solid rgba(0, 0, 0, 0.23);
     border-radius: 4px;
 
-    .input {
-        border: 1px solid rgba(0, 0, 0, 0.23);
-        border-radius: 4px;
-        margin: -2px;
+    .label {
+        top: 13px;
+    }
 
-        &:hover {
-            border-color: #222222;
+    &:hover {
+        border-color: #6e6e6e;
+    }
+
+    .input {
+        border-radius: 4px;
+
+        &:not(:placeholder-shown) ~ .label,
+        &:focus-visible ~ .label {
+            top: -12px;
+            background-size: cover;
         }
 
-        &:not([value='']) ~ .label,
-        &:focus-visible ~ .label {
-            top: -10px;
-            background-color: #fff;
+        &:not(:placeholder-shown) ~ .legend,
+        &:focus-visible ~ .legend {
+            display: block;
         }
     }
 }
@@ -105,7 +113,7 @@
     .input {
         padding: 25px 14px 7px;
 
-        &:not([value='']) ~ .label,
+        &:not(:placeholder-shown) ~ .label,
         &:focus-visible ~ .label {
             top: 5px;
         }
@@ -123,7 +131,7 @@
         padding: 4px 0 5px;
         margin-top: 16px;
 
-        &:not([value='']) ~ .label,
+        &:not(:placeholder-shown) ~ .label,
         &:focus-visible ~ .label {
             top: -4px;
         }
@@ -144,11 +152,7 @@
 
     .outlined {
         &:has(> .input:focus-visible) {
-            border: 2px solid var(--primary-color);
-
-            .input {
-                border: 1px solid transparent;
-            }
+            border-color: var(--primary-color);
         }
     }
 
@@ -236,16 +240,15 @@
     }
 }
 
-.select {
-    position: relative;
+.legend {
+    display: none;
+    margin-left: 12px;
+    font-size: 0.75rem;
+    height: 0;
+    opacity: 0;
+}
 
-    * {
-        cursor: pointer;
-    }
-
-    .input {
-        padding-right: 35px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-    }
+.fieldset {
+    padding: 0;
+    margin: 0;
 }

@@ -1,5 +1,5 @@
 import React, { FC, KeyboardEvent, useLayoutEffect, useRef, useState } from 'react'
-import TextField from '@/components/TextField/TextField'
+import { TextField } from '@/components/TextField/'
 import { createPortal } from 'react-dom'
 import Options, { Option } from '@/components/Select/Options'
 import styles from './Select.module.scss'
@@ -30,7 +30,17 @@ type Props = {
 }
 
 /** Styled variant of html select. Component must be controlled. Options must be provided as prop */
-const Select: FC<Props> = ({ open, onToggle, value, onChange, options, variant, label, fullWidth, disabled }) => {
+export const Select: FC<Props> = ({
+    open,
+    onToggle,
+    value,
+    onChange,
+    options,
+    variant,
+    label,
+    fullWidth,
+    disabled,
+}) => {
     const [userSelection, setUserSelection] = useState(-1)
 
     const container = useRef<HTMLDivElement>()
@@ -39,7 +49,7 @@ const Select: FC<Props> = ({ open, onToggle, value, onChange, options, variant, 
     useLayoutEffect(() => {
         if (!open || disabled) return
         optionsContainer.current.style.setProperty('--y', container.current.getBoundingClientRect().bottom + 'px')
-        optionsContainer.current.style.setProperty('--x', container.current.getBoundingClientRect().left + 8 + 'px')
+        optionsContainer.current.style.setProperty('--x', container.current.getBoundingClientRect().left + 'px')
         optionsContainer.current.style.setProperty('--width', container.current.clientWidth + 'px')
     }, [open])
 
@@ -110,7 +120,7 @@ const Select: FC<Props> = ({ open, onToggle, value, onChange, options, variant, 
                     value={value === null ? '' : options.find((item) => item.value === value)?.title}
                     onChange={() => {}}
                     disabled={disabled}
-                    select
+                    className={styles.select}
                     readOnly
                 />
             </div>
@@ -131,5 +141,3 @@ const Select: FC<Props> = ({ open, onToggle, value, onChange, options, variant, 
         </>
     )
 }
-
-export default Select

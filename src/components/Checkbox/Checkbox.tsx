@@ -17,7 +17,7 @@ type Props = {
 }
 
 /** Styled variant on html checkbox. Component must be controlled */
-const Checkbox: FC<Props> = ({ checked, onChange, disabled, label }) => {
+export const Checkbox: FC<Props> = ({ checked, onChange, disabled, label }) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (disabled) return
 
@@ -46,5 +46,3 @@ const Checkbox: FC<Props> = ({ checked, onChange, disabled, label }) => {
         </label>
     )
 }
-
-export default Checkbox
