@@ -1,14 +1,8 @@
-import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
-import React from 'react'
-import App from './App'
+import { Button } from '@/components/Button'
+import { Checkbox } from '@/components/Checkbox'
+import { Modal } from '@/components/Modal'
+import { Select } from '@/components/Select'
+import { Switch } from '@/components/Switch'
+import { TextField } from '@/components/TextField'
 
-const routes = createRoutesFromElements(<Route path={'/'} element={<App />} />)
-
-const router = createBrowserRouter(routes)
-
-createRoot(document.querySelector('#root')).render(
-    <React.StrictMode>
-        <RouterProvider router={router} />
-    </React.StrictMode>
-)
+export { Button, Checkbox, Modal, Select, Switch, TextField }

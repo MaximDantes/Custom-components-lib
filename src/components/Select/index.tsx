@@ -1,4 +1,4 @@
 import Select from './Select'
-import { Option } from './Options'
+import type { Option } from './Options'
 
 export { Select, Option }
