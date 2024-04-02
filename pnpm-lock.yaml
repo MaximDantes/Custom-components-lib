@@ -8,6 +8,9 @@ dependencies:
     classnames:
         specifier: ^2.5.1
         version: 2.5.1
+    dist:
+        specifier: link:D:/projects/custom-components-lib/dist
+        version: link:dist
     react:
         specifier: ^18.2.0
         version: 18.2.0

@@ -2,7 +2,6 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import webpack from 'webpack'
 import { BuildOptions } from './types'
 import ReactRefreshTypeScript from 'react-refresh-typescript'
-import buildBabelLoader from './babel/build-babel-loader'
 import svgrOptions from './svgr/svgr-options'
 
 const buildLoaders = (options: BuildOptions): webpack.ModuleOptions['rules'] => {
@@ -22,8 +21,6 @@ const buildLoaders = (options: BuildOptions): webpack.ModuleOptions['rules'] => 
             },
         ],
     }
-
-    const babelLoader = buildBabelLoader(options)
 
     const cssLoader = {
         loader: 'css-loader',
@@ -56,7 +53,7 @@ const buildLoaders = (options: BuildOptions): webpack.ModuleOptions['rules'] => 
         ],
     }
 
-    return [babelLoader, tsLoader, sassLoader, assetsLoader, svgLoader]
+    return [tsLoader, sassLoader, assetsLoader, svgLoader]
 }
 
 export default buildLoaders
