@@ -1,8 +1,5 @@
-import { Button } from '@/components/Button'
-import { Checkbox } from '@/components/Checkbox'
-import { Modal } from '@/components/Modal'
-import { Select } from '@/components/Select'
-import { Switch } from '@/components/Switch'
-import { TextField } from '@/components/TextField'
+import { App } from '@/App'
+import React from 'react'
+import { createRoot } from 'react-dom/client'
 
-export { Button, Checkbox, Modal, Select, Switch, TextField }
+createRoot(document.querySelector('#root')).render(<App />)
