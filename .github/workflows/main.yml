@@ -1,23 +1,22 @@
-name: linting, testing, building,
+name: CI,
+
 on:
     push:
         branches: [master]
     pull_request:
         branches: [master]
 jobs:
-    pipeline:
+    cache-and-install:
         runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                node_version: [20.x]
 
         steps:
-            - uses: actions/checkout@v4
+            - name: Checkout
+              uses: actions/checkout@v4
 
-            - name: Starting Node.js ${{matrix.node-version}}
-              uses: actions/setup-node@v1
+            - name: Install Node.js
+              uses: actions/setup-node@v4
               with:
-                  node-version: ${{matrix.node-version}}
+                  node-version: 20
 
             - name: Setup pnpm
               uses: pnpm/action-setup@v3
