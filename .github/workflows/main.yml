@@ -6,7 +6,7 @@ on:
     pull_request:
         branches: [master]
 jobs:
-    cache-and-install:
+    Build_production:
         runs-on: ubuntu-latest
 
         steps:
@@ -24,16 +24,76 @@ jobs:
                   version: 8
 
             - name: Install modules
-              run: pnpm install
+              run: pnpm i
 
             - name: Build production
               run: pnpm build:prod
 
+    Linting:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Install Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v3
+              with:
+                  version: 8
+
+            - name: Install modules
+              run: pnpm i
+
             - name: Linting
               run: pnpm lint
 
+    Unit_testing:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Install Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v3
+              with:
+                  version: 8
+
+            - name: Install modules
+              run: pnpm i --frozen-lockfile
+
             - name: Unit testing
               run: pnpm test:unit
+
+    Screenshot_testing:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Install Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v3
+              with:
+                  version: 8
+
+            - name: Install modules
+              run: pnpm i
 
             - name: Build storybook
               run: pnpm storybook:build
