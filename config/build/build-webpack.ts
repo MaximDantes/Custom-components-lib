@@ -11,17 +11,8 @@ const buildWebpack = (options: BuildOptions): webpack.Configuration => {
 
         output: {
             path: options.paths.output,
-            filename: 'index.js',
-            library: 'custom-components-lib',
-            libraryTarget: 'umd',
-            umdNamedDefine: true,
+            filename: '[name].[hash].js',
             clean: true,
-        },
-
-        externals: {
-            classnames: 'classnames',
-            react: 'react',
-            'react-dom': 'react-dom',
         },
 
         mode: options.mode,
